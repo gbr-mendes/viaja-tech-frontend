@@ -4,13 +4,15 @@ export function Table({ fields, rowsData }) {
     return (
         <table className="general-table">
             <thead>
-                {fields.map((field, i) => <th key={i + 1}>{field}</th>)}
+                <tr>
+                    {fields.map((field, i) => <th key={i + 1} className="table-header">{field}</th>)}
+                </tr>
             </thead>
             <tbody>
                 {rowsData.map(row => {
-                    return (<tr key={row.id}>
+                    return (<tr className="table-row" key={row.id}>
                         {Object.keys(row).map((key) => {
-                            return fields.includes(key) && <td>{row[key]}</td>
+                            return fields.includes(key) && <td key={row[key]}>{row[key]}</td>
 
                         })}
                     </tr>)
