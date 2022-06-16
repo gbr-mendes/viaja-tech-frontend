@@ -1,0 +1,136 @@
+@import url('https://fonts.googleapis.com/css2?family=Exo:wght@400;800&display=swap');
+
+/* General Style */
+body {
+    height: 100vh;
+    font-family: 'Exo', sans-serif;
+    font-weight: 800;
+    box-sizing: border-box;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-size: 1em;
+    font-family: 'Exo', sans-serif;
+    font-weight: 800;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+/* Icons style */
+i[check] {
+    color: #0f0;
+}
+
+i[cross] {
+    color: #f00;
+}
+
+i[default]:active,
+i[default]:hover {
+    color: #F06B05;
+}
+
+/* Grid setup */
+/* .main-container {
+    display: grid;
+    grid-template-columns: 15vw 85vw;
+    grid-template-rows: 15vh 65vh 20vh;
+} */
+
+/* SCROOL BAR START*/
+/* width */
+::-webkit-scrollbar {
+    width: 6px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 5px grey;
+    border-radius: 10px;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: rgb(127, 133, 133);
+    border-radius: 10px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+    background: #646767;
+}
+
+/* SCROOL BAR END */
+
+/* BUTTONS */
+.btn {
+    font-weight: bold;
+    background-color: #252D2B;
+    color: #f3f6f4;
+    transition: .8s;
+    box-shadow: 5px 0px 15px 1px #000000;
+}
+
+.btn.btn-active {
+    background-color: #F06B05;
+    color: #121615;
+}
+
+.btn.btn-active:hover {
+    background-color: #cc5e0a;
+    color: #121615;
+}
+
+/* END BUTTONS */
+
+/* PAGINATION START */
+.pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 10px;
+}
+
+.pagination-list {
+    list-style: none;
+    display: flex;
+}
+
+.pagination-item {
+    background-color: #252D2B;
+    font-size: 1.1em;
+    padding: 15px;
+    color: #f3f6f4;
+    cursor: pointer;
+    transition: .8s;
+    box-shadow: 5px 0px 15px 1px #000000;
+}
+
+.pagination-item:hover,
+.pg-active {
+    background-color: #F06B05;
+    color: #121615;
+}
+
+/* PAGINATION END */
+
+.contacts-mail {
+    overflow-y: scroll;
+    height: 450px;
+}
+
+/* MEDIA QUERIES */
+
+@media (max-width: 992px) {
+    .side-menu {
+        height: 80%;
+    }
+}

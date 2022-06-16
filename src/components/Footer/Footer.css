@@ -1,0 +1,20 @@
+.dashboard-footer {
+    height: 15%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #252D2B;
+    color: #F86F05;
+}
+
+.dashboard-footer span {
+    font-weight: 600;
+}
+
+.footer-logo {
+    width: 50%;
+}
+
+.footer-logo img {
+    width: 100px;
+}

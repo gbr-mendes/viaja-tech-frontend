@@ -1,0 +1,20 @@
+.main-header input {
+    width: 100%;
+    background-color: #DEE6DF;
+    background-image: url("./img/lupa.png");
+    background-repeat: no-repeat;
+    background-position: left;
+    background-size: 2em;
+    padding-left: 30px;
+    border: 2px solid #252D2B;
+    border-radius: 30px;
+}
+
+.main-header input:focus {
+    outline: 1px solid #090b0b;
+}
+
+.toggle-menu {
+    cursor: pointer;
+    transition: .7s;
+}

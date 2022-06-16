@@ -1,0 +1,17 @@
+.main-content {
+    padding-top: 20px;
+    display: flex;
+    flex-direction: column;
+    background-color: #DCE5DD;
+    height: 85%;
+}
+
+.content-section {
+    height: 70vh;
+    overflow-y: scroll;
+}
+
+/* Pages Dynamic rendered start*/
+.title-content {
+    font-size: 2.1em;
+}

@@ -1,0 +1,80 @@
+.side-bar {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #252D2B;
+    height: auto;
+}
+
+/* header start */
+.side-bar-header {
+    width: 100%;
+}
+
+.profile-image {
+    width: 60%;
+    border-radius: 100px;
+    margin-bottom: 2.4em;
+}
+
+.welcome-message {
+    color: #F86F05;
+}
+
+.welcome-message h3 {
+    font-size: 1.3em;
+    font-weight: 900;
+}
+
+/* header end */
+
+/* menu start */
+.side-menu {
+    position: relative;
+    height: 50%;
+    width: 100%;
+    color: #F06B05;
+    font-size: 1em;
+    overflow: scroll;
+    overflow-x: hidden;
+}
+
+.side-menu i {
+    /* Icon style*/
+    color: #DEE6DF;
+}
+
+.side-menu a {
+    color: #F06B05;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.items-list {
+    list-style: none;
+    padding: 0;
+}
+
+.list-item {
+    box-sizing: content-box;
+    cursor: pointer;
+    background-color: #121615;
+    padding: 10px 30px;
+    margin: 1px 0px;
+    height: 30px;
+    box-shadow: 5px 0px 15px 1px #000000;
+    transition: .8s;
+}
+
+.list-item:hover,
+.active li {
+    background-color: #F06B05;
+    color: #121615;
+}
+
+.list-item span {
+    display: inline-block;
+    margin-left: 20px;
+}
+
+/* menu end */
