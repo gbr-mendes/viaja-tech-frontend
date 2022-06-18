@@ -38,7 +38,7 @@ body {
 
 body,
 html {
-    height: 100%;
+    /* height: 100%; */
     font-family: Poppins-Regular, sans-serif;
 }
 
@@ -525,22 +525,4 @@ iframe {
         visibility: visible;
         opacity: 1;
     }
-}
-
-.dashboard-footer {
-    height: 8%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: #252D2B;
-    color: #F86F05;
-
-}
-
-.footer-logo {
-    width: 50%;
-}
-
-.footer-logo img {
-    width: 100px;
 }
