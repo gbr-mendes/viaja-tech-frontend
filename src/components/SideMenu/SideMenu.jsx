@@ -15,13 +15,13 @@ export function SideMenu() {
             <div className="side-menu d-flex flex-column d-lg-block justify-content-center align-items-center">
                 <nav className="menu-items">
                     <ul className="items-list">
-                        <Button link="/clients" text="Clientes" icon="fa-solid fa-money-bills" isActive={true} />
-                        <Button link="/leads" text="Leads" icon="fa-regular fa-eye" />
-                        <Button link="/marketing" text="Marketing" icon="fa-solid fa-headphones-simple" />
-                        <Button link="/reports" text="Relatórios" icon="fa-solid fa-print" />
-                        <Button link="/calls" text="Chamados" icon="fa-solid fa-phone" />
-                        <Button link="/emails" text="Emails" icon="fa-regular fa-envelope" />
-                        <Button link="/tools" text="Ferramentas" icon="fa-solid fa-screwdriver-wrench" />
+                        <Button link="/dashboard/clients" text="Clientes" icon="fa-solid fa-money-bills" isActive={true} />
+                        <Button link="/dashboard/leads" text="Leads" icon="fa-regular fa-eye" />
+                        <Button link="/dashboard/marketing" text="Marketing" icon="fa-solid fa-headphones-simple" />
+                        <Button link="/dashboard/reports" text="Relatórios" icon="fa-solid fa-print" />
+                        <Button link="/dashboard/calls" text="Chamados" icon="fa-solid fa-phone" />
+                        <Button link="/dashboard/emails" text="Emails" icon="fa-regular fa-envelope" />
+                        <Button link="/dashboard/tools" text="Ferramentas" icon="fa-solid fa-screwdriver-wrench" />
                     </ul>
                 </nav>
             </div>
