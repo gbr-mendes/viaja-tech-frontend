@@ -3,24 +3,16 @@ import { Main } from '../components/Main/Main';
 import { SideMenu } from '../components/SideMenu/SideMenu';
 import { PrivateRoute } from "./PrivateRoute";
 import { useFetch } from "../hooks/useFetch";
-import { Spinner } from "react-bootstrap";
 
 
 export function Dashboard() {
-    const token = window.localStorage.getItem('auth-token')
-    const { data, error, loading } = useFetch('https://viaja-tech-backend.herokuapp.com/users/me', token)
-    if (!error && data) {
-        window.localStorage.setItem('userData', JSON.stringify(data))
-    }
-
+    const authToken = localStorage.getItem("auth-token")
+    const { data } = useFetch('https://viaja-tech-backend.herokuapp.com/users/me', authToken)
+    localStorage.setItem('userData', JSON.stringify(data))
     return (
-        <PrivateRoute excludedRoles={['isClient']}>
-            {loading && (
-                <Spinner animation="border" role="status">
-                    <span className="visually-hidden">Loading...</span>
-                </Spinner>
-            )}
-            {data && !loading && (
+        <PrivateRoute redirectTo={'/login/dashboard'} excludedRoles={['isClient']} userData={data}>
+
+            {data && (
                 <section className="container-fluid vh-100 vw-100 d-flex row p-0" id="main-container">
                     <SideMenu />
 
