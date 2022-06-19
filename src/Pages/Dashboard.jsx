@@ -8,7 +8,7 @@ import { Spinner } from "react-bootstrap";
 
 export function Dashboard() {
     const token = window.localStorage.getItem('auth-token')
-    const { data, error, loading } = useFetch('http://localhost:3001/users/me', token)
+    const { data, error, loading } = useFetch('https://viaja-tech-backend.herokuapp.com/users/me', token)
     if (!error && data) {
         window.localStorage.setItem('userData', JSON.stringify(data))
     }
