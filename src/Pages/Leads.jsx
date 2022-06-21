@@ -2,7 +2,7 @@ import { Spinner } from 'react-bootstrap'
 import { useFetch } from '../hooks/useFetch'
 import { Table } from '../components/Table'
 export function Leads() {
-    const { data, loading } = useFetch('http://localhost:3001/leads?limit=10&page=1')
+    const { data, loading } = useFetch('https://viaja-tech-backend.herokuapp.com/leads?limit=10&page=1')
     return (
         <>
             <h1>Leads</h1>
