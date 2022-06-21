@@ -1,0 +1,47 @@
+.profile-container {
+    margin: 5px;
+    border: 1px solid black;
+    background-color: #252d2b;
+    padding: 15px;
+    border-radius: 15px;
+}
+
+.avatar {
+    width: 30%;
+}
+
+.general-info {
+    width: 80%;
+}
+
+.avatar img {
+    width: 75%;
+}
+
+input {
+    display: none;
+}
+
+label.choose-file,
+button.button {
+    margin: 10px;
+    padding: 7px;
+    border-radius: 10px;
+    cursor: pointer;
+    color: #252d2b;
+    background-color: #eb6e15;
+    box-shadow: 5px 5px 15px 5px #000000;
+}
+
+label.choose-file:hover,
+button.button {
+    background-color: #e76101;
+}
+
+.profile-form label {
+    color: white;
+}
+
+.profile-form input[disabled] {
+    background-color: rgb(196, 196, 196);
+}

@@ -8,6 +8,7 @@ export function SideMenu() {
     const [userName, setUserName] = useState('Usuário')
     useEffect(() => {
         const userData = JSON.parse(window.localStorage.getItem('userData'))
+
         if (userData) {
             const { userInfo } = userData
             if (userInfo.avatar) {

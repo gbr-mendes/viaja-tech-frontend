@@ -55,6 +55,11 @@
     cursor: pointer;
 }
 
+.dropdown-content a {
+    color: inherit;
+    text-decoration: none;
+}
+
 /* Change color of dropdown links on hover */
 .dropdown-content div:hover {
     background-color: #ddd;
