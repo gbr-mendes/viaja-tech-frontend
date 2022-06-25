@@ -31,10 +31,10 @@
 /* Tabs end */
 
 /* Table start */
+
 .general-table table {
     border-collapse: collapse;
     border: 1px solid #1c2220;
-    width: 100%;
     box-shadow: 5px 0px 10px 1px #000000;
 }
 

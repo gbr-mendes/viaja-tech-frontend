@@ -13,7 +13,7 @@ export function Main() {
         <main className="main-content p-0">
             <MainHeader />
             <section className="content-section container-fluid">
-                <div className="dyanamic-content d-flex justify-content-center align-items-center flex-column">
+                <div className="dyanamic-content d-flex flex-column">
 
                     <Routes>
                         <Route path="/" element={<Clients />} />

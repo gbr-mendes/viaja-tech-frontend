@@ -38,13 +38,6 @@ i[default]:hover {
     color: #F06B05;
 }
 
-/* Grid setup */
-/* .main-container {
-    display: grid;
-    grid-template-columns: 15vw 85vw;
-    grid-template-rows: 15vh 65vh 20vh;
-} */
-
 /* SCROOL BAR START*/
 /* width */
 ::-webkit-scrollbar {

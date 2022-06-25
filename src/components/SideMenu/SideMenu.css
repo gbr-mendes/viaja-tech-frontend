@@ -1,6 +1,6 @@
 .side-bar {
     display: flex;
-    flex-direction: column;
+    /* flex-direction: column; */
     align-items: center;
     background-color: #252D2B;
     height: auto;
@@ -30,8 +30,8 @@
 
 /* menu start */
 .side-menu {
+
     position: relative;
-    height: 50%;
     width: 100%;
     color: #F06B05;
     font-size: 1em;
@@ -48,6 +48,7 @@
     color: #F06B05;
     text-decoration: none;
     font-weight: bold;
+    padding: 0;
 }
 
 .items-list {

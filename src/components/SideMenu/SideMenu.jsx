@@ -18,7 +18,7 @@ export function SideMenu() {
         }
     }, [])
     return (
-        <aside className="side-bar col-2 p-0">
+        <aside className="side-bar flex-row flex-lg-column col-2 p-0">
             <header className="side-bar-header d-none d-lg-flex flex-column align-items-center justify-content-center p-4">
                 <img className="profile-image" src={avatar ? avatar : unknown} alt="Profile of the user" />
                 <div className="welcome-message text-center">

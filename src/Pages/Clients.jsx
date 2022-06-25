@@ -6,7 +6,9 @@ export function Clients() {
     const { data, loading } = useFetch('https://62a6186c430ba53411d10fd7.mockapi.io/clients')
     return (
         <>
-            <h1>Clients page</h1>
+            <div className="d-flex justify-content-center">
+                <h1>Clients page</h1>
+            </div>
             {loading && (
                 <Spinner animation="border" role="status">
                     <span className="visually-hidden">Loading...</span>

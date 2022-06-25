@@ -5,7 +5,9 @@ export function Leads() {
     const { data, loading } = useFetch('https://viaja-tech-backend.herokuapp.com/leads?limit=10&page=1')
     return (
         <>
-            <h1>Leads</h1>
+            <div className='d-flex justify-content-center'>
+                <h1>Leads</h1>
+            </div>
             {loading && (
                 <Spinner animation="border" role="status">
                     <span className="visually-hidden">Loading...</span>
