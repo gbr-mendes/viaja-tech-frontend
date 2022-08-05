@@ -33,7 +33,6 @@ export function SideMenu() {
                         <Button link="/dashboard/marketing" text="Marketing" icon="fa-solid fa-headphones-simple" />
                         <Button link="/dashboard/reports" text="Relatórios" icon="fa-solid fa-print" />
                         <Button link="/dashboard/calls" text="Chamados" icon="fa-solid fa-phone" />
-                        <Button link="/dashboard/emails" text="Emails" icon="fa-regular fa-envelope" />
                         <Button link="/dashboard/tools" text="Ferramentas" icon="fa-solid fa-screwdriver-wrench" />
                     </ul>
                 </nav>

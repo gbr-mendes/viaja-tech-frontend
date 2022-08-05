@@ -6,7 +6,7 @@ export function useFetch(url, token) {
     const [loading, setLoading] = useState(true)
 
     useEffect(() => {
-        fetch(url, token ? { method: 'GET', headers: { 'auth-token': token } } : null)
+        fetch(url, token ? { method: 'GET', headers: { 'Authorization': `Bearer ${token}` } } : null)
             .then(res => {
                 if (!res.ok) {
                     throw Error('Could not fetch the data for that resourse')

@@ -13,7 +13,11 @@ export function PrivateRoute({ children, redirectTo, excludedRoles, userData }) 
             setUserInfo(userData.userInfo)
         }
         if (userInfo) {
-            userInfo.roles.map(role => excludedRoles.includes(role) && navigate('/'))
+            const { role } = userInfo;
+            if (excludedRoles.includes(role)) {
+                localStorage.clear();
+                navigate(redirectTo);
+            }
         }
     }, [authToken, navigate, redirectTo, userData, userInfo, excludedRoles])
 

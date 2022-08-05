@@ -7,6 +7,7 @@ import { Leads } from '../../Pages/Leads'
 import { Profile } from '../../Pages/Profile'
 
 import './Main.css'
+import { Marketing } from '../../Pages/Marketing'
 
 export function Main() {
     return (
@@ -19,6 +20,7 @@ export function Main() {
                         <Route path="/" element={<Clients />} />
                         <Route path="/clients" element={<Clients />} />
                         <Route path="/leads" element={<Leads />} />
+                        <Route path="/marketing" element={<Marketing />} />
                         <Route path='/profile' element={<Profile />} />
                     </Routes>
 
