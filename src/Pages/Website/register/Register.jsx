@@ -135,7 +135,7 @@ export function Register() {
                 id="input-password"
                 aria-describedby="passwordHelp"
                 onChange={(e) => {
-                  setInputCPF(e.target.value);
+                  setInputPassword(e.target.value);
                 }}
               />
             </div>
@@ -150,7 +150,7 @@ export function Register() {
                 id="input-confirm-password"
                 aria-describedby="confirmPasswordHelp"
                 onChange={(e) => {
-                  setInputPhone(e.target.value);
+                  setInputConfirmPassword(e.target.value);
                 }}
               />
             </div>
