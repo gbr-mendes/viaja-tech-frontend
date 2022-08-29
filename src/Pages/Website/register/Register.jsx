@@ -2,10 +2,10 @@ export function Register() {
   return (
     <section
       id="login-form"
-      className="d-flex justify-content-center align-items-center flex-column bg-white"
+      className="d-flex justify-content-center align-items-center flex-column bg-white vh-100"
     >
       <h2>Registre-se</h2>
-      <form className="col-3 d-flex flex-column">
+      <form className="col-9 col-md-6 col-lg-3 d-flex flex-column">
         <div className="mb-3">
           <label for="exampleInputEmail1" className="form-label">
             Nome
@@ -27,8 +27,8 @@ export function Register() {
             aria-describedby="emailHelp"
           />
         </div>
-        <div className="mb-3 d-flex justify-content-between">
-          <div className="m-3">
+        <div className="mb-3 d-flex flex-column flex-md-row">
+          <div className="m-0 me-md-3">
             <label for="exampleInputEmail1" className="form-label">
               CPF
             </label>
@@ -40,7 +40,7 @@ export function Register() {
             />
           </div>
 
-          <div className="m-3">
+          <div className="m-0 ms-md-3">
             <label for="exampleInputEmail1" className="form-label">
               Telefone
             </label>

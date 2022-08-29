@@ -5,7 +5,7 @@ export function Login() {
       className="d-flex justify-content-center align-items-center flex-column bg-white vh-100"
     >
       <h2>Bem-vindo(a)</h2>
-      <form className="col-4 d-flex flex-column">
+      <form className="col-9 col-md-6 col-lg-3 d-flex flex-column">
         <div className="mb-3">
           <label for="exampleInputEmail1" className="form-label">
             Email
