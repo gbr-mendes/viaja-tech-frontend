@@ -1,18 +1,18 @@
 export function ServicesSection() {
   return (
-    <section class="page-section" id="services">
-      <div class="container">
-        <div class="text-center">
-          <h2 class="section-heading text-uppercase">Serviços</h2>
-          <h3 class="section-subheading text-muted">
+    <section className="page-section" id="services">
+      <div className="container">
+        <div className="text-center">
+          <h2 className="section-heading text-uppercase">Serviços</h2>
+          <h3 className="section-subheading text-muted">
             Lorem ipsum dolor sit amet consectetur.
           </h3>
         </div>
-        <div class="row text-center">
-          <div class="col-md-12">
-            <span class="fa-solid fa-plane-departure fa-4x"></span>
-            <h4 class="my-3">Lorem Ipsum</h4>
-            <p class="text-muted">
+        <div className="row text-center">
+          <div className="col-md-12">
+            <span className="fa-solid fa-plane-departure fa-4x"></span>
+            <h4 className="my-3">Lorem Ipsum</h4>
+            <p className="text-muted">
               Lorem ipsum dolor sit amet consectetur adipisicing elit. Impedit
               blanditiis iusto laboriosam saepe, in excepturi, quae ipsum odit
               quisquam praesentium alias accusantium voluptates voluptatibus

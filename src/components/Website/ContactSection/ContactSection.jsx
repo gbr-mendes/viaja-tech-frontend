@@ -2,21 +2,21 @@ import "./ContactSection.css";
 
 export function ContactSection() {
   return (
-    <section class="page-section" id="contact">
-      <div class="container">
-        <div class="text-center">
-          <h2 class="section-heading text-uppercase">Contate-nos</h2>
-          <h3 class="section-subheading text-muted">
+    <section className="page-section" id="contact">
+      <div className="container">
+        <div className="text-center">
+          <h2 className="section-heading text-uppercase">Contate-nos</h2>
+          <h3 className="section-subheading text-muted">
             Lorem ipsum dolor sit amet consectetur.
           </h3>
         </div>
 
         <form id="contactForm" data-sb-form-api-token="API_TOKEN">
-          <div class="row align-items-stretch mb-5">
-            <div class="col-md-6">
-              <div class="form-group">
+          <div className="row align-items-stretch mb-5">
+            <div className="col-md-6">
+              <div className="form-group">
                 <input
-                  class="form-control"
+                  className="form-control"
                   id="name"
                   type="text"
                   placeholder="Your Name *"
@@ -24,9 +24,9 @@ export function ContactSection() {
                   required
                 />
               </div>
-              <div class="form-group">
+              <div className="form-group">
                 <input
-                  class="form-control"
+                  className="form-control"
                   id="email"
                   type="email"
                   placeholder="Your Email *"
@@ -34,31 +34,34 @@ export function ContactSection() {
                   required
                 />
               </div>
-              <div class="form-group mb-md-0">
+              <div className="form-group mb-md-0">
                 <input
-                  class="form-control"
+                  className="form-control"
                   id="phone"
                   type="tel"
                   placeholder="Your Phone *"
                   data-sb-validations="required"
                   required
                 />
-                <div class="invalid-feedback" data-sb-feedback="phone:required">
+                <div
+                  className="invalid-feedback"
+                  data-sb-feedback="phone:required"
+                >
                   A phone number is required.
                 </div>
               </div>
             </div>
-            <div class="col-md-6">
-              <div class="form-group form-group-textarea mb-md-0">
+            <div className="col-md-6">
+              <div className="form-group form-group-textarea mb-md-0">
                 <textarea
-                  class="form-control"
+                  className="form-control"
                   id="message"
                   placeholder="Your Message *"
                   required
                   data-sb-validations="required"
                 ></textarea>
                 <div
-                  class="invalid-feedback"
+                  className="invalid-feedback"
                   data-sb-feedback="message:required"
                 >
                   A message is required.
@@ -67,21 +70,21 @@ export function ContactSection() {
             </div>
           </div>
 
-          <div class="d-none" id="submitSuccessMessage">
-            <div class="text-center text-white mb-3">
-              <div class="fw-bolder">Form submission successful!</div>
+          <div className="d-none" id="submitSuccessMessage">
+            <div className="text-center text-white mb-3">
+              <div className="fw-bolder">Form submission successful!</div>
             </div>
           </div>
 
-          <div class="d-none" id="submitErrorMessage">
-            <div class="text-center text-danger mb-3">
+          <div className="d-none" id="submitErrorMessage">
+            <div className="text-center text-danger mb-3">
               Error sending message!
             </div>
           </div>
 
-          <div class="text-center">
+          <div className="text-center">
             <button
-              class="btn btn-primary btn-xl text-uppercase"
+              className="btn btn-primary btn-xl text-uppercase"
               id="submitButton"
               type="submit"
             >

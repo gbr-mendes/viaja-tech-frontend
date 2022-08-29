@@ -1,15 +1,18 @@
 import "./Navbar.css";
 import logo from "./img/logo-crm-grande.png";
+import { Link } from "react-router-dom";
+import { HashLink } from "react-router-hash-link";
 
 export function Navbar() {
   return (
-    <nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="mainNav">
-      <div class="container">
-        <a class="navbar-brand" href="./index.html">
+    <nav className="navbar navbar-expand-lg navbar-dark fixed-top" id="mainNav">
+      <div className="container">
+        <Link className="navbar-brand" to={"/home"}>
           <img src={logo} alt="Logo viaja-tech" />
-        </a>
+        </Link>
+
         <button
-          class="navbar-toggler"
+          className="navbar-toggler"
           type="button"
           data-bs-toggle="collapse"
           data-bs-target="#navbarResponsive"
@@ -18,29 +21,31 @@ export function Navbar() {
           aria-label="Toggle navigation"
         >
           Menu
-          <i class="fas fa-bars ms-1"></i>
+          <i className="fas fa-bars ms-1"></i>
         </button>
-        <div class="collapse navbar-collapse" id="navbarResponsive">
-          <ul class="navbar-nav text-uppercase ms-auto py-4 py-lg-0">
-            <li class="nav-item">
-              <a class="nav-link" href="#services">
-                Nossos Serviços
-              </a>
+        <div className="collapse navbar-collapse" id="navbarResponsive">
+          <ul className="navbar-nav text-uppercase ms-auto py-4 py-lg-0">
+            <li className="nav-item">
+              <HashLink className="nav-link" to={"home#services"}>
+                Serviços
+              </HashLink>
             </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#contact">
-                Contato
-              </a>
+            <li className="nav-item">
+              <li className="nav-item">
+                <HashLink className="nav-link" to={"home#contact"}>
+                  Contato
+                </HashLink>
+              </li>
             </li>
-            <li class="nav-item">
-              <a class="nav-link" href="./login.html">
+            <li className="nav-item">
+              <Link className="nav-link" to={"/login"}>
                 Login
-              </a>
+              </Link>
             </li>
-            <li class="nav-item">
-              <a class="nav-link" href="./register.html">
+            <li className="nav-item">
+              <Link className="nav-link" to={"/register"}>
                 Registre-se
-              </a>
+              </Link>
             </li>
           </ul>
         </div>
