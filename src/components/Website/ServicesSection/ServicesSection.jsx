@@ -1,4 +1,3 @@
-import "./ServicesSection.css";
 export function ServicesSection() {
   return (
     <section class="page-section" id="services">
