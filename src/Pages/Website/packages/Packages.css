@@ -1,0 +1,13 @@
+.package{
+    cursor: pointer;
+    box-shadow: 5px 5px 15px 5px #000000;
+}
+.package:hover{
+    background-color: #e0e0e0;
+}
+.package-title{
+    color: #ef6700;
+}
+.package-price{
+    color: #02AF66;
+}

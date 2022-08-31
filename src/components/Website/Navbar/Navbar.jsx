@@ -38,6 +38,11 @@ export function Navbar() {
               </li>
             </li>
             <li className="nav-item">
+              <Link className="nav-link" to={"/packages"}>
+                Pacotes
+              </Link>
+            </li>
+            <li className="nav-item">
               <Link className="nav-link" to={"/login"}>
                 Login
               </Link>
