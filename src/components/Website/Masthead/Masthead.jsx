@@ -1,3 +1,4 @@
+import { HashLink } from "react-router-hash-link";
 import "./Masthead.css";
 
 export function Masthead() {
@@ -6,9 +7,12 @@ export function Masthead() {
       <div className="container">
         <div className="masthead-subheading">Bem vindo ao</div>
         <div className="masthead-heading text-uppercase">Viaja Tech</div>
-        <a className="btn btn-primary btn-xl text-uppercase" href="#services">
+        <HashLink
+          to={"/home#services"}
+          className="btn btn-primary btn-xl text-uppercase"
+        >
           Saiba Mais
-        </a>
+        </HashLink>
       </div>
     </header>
   );
