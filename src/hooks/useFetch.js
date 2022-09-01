@@ -21,7 +21,7 @@ export function useFetch(url, token) {
             .catch(err => {
                 setError(err.message)
                 setLoading(false)
-                setData([])
+                setData(null)
             })
     }, [url, token])
 

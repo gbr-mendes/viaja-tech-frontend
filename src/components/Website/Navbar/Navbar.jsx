@@ -2,8 +2,21 @@ import "./Navbar.css";
 import logo from "./img/logo-crm-grande.png";
 import { Link } from "react-router-dom";
 import { HashLink } from "react-router-hash-link";
+import { useContext } from "react";
+import { AuthContext } from "../../../providers/auth";
+import { useNavigate } from "react-router-dom";
 
 export function Navbar() {
+  const { user, setUser } = useContext(AuthContext);
+  const navigate = useNavigate();
+
+  function logOut() {
+    localStorage.removeItem("userData");
+    localStorage.removeItem("auth-token");
+    setUser(null);
+    navigate("/");
+  }
+
   return (
     <nav className="navbar navbar-expand-lg navbar-dark fixed-top" id="mainNav">
       <div className="container">
@@ -42,16 +55,29 @@ export function Navbar() {
                 Pacotes
               </Link>
             </li>
-            <li className="nav-item">
-              <Link className="nav-link" to={"/login"}>
-                Login
-              </Link>
-            </li>
-            <li className="nav-item">
-              <Link className="nav-link" to={"/register"}>
-                Registre-se
-              </Link>
-            </li>
+            {!user && (
+              <>
+                <li className="nav-item">
+                  <Link className="nav-link" to={"/login"}>
+                    Login
+                  </Link>
+                </li>
+                <li className="nav-item">
+                  <Link className="nav-link" to={"/register"}>
+                    Registre-se
+                  </Link>
+                </li>
+              </>
+            )}
+            {user && (
+              <>
+                <li className="nav-item">
+                  <button className="nav-link" onClick={logOut}>
+                    LOGOUT
+                  </button>
+                </li>
+              </>
+            )}
           </ul>
         </div>
       </div>
