@@ -6,11 +6,9 @@ import { useEffect } from "react";
 import { useContext } from "react";
 import { AuthContext } from "../../../providers/auth";
 import { useFetch } from "../../../hooks/useFetch";
-import { useState } from "react";
 
 export function IndexPage() {
-  const { user, setUser } = useContext(AuthContext);
-  const [userData, setUserData] = useState(null);
+  const { setUser } = useContext(AuthContext);
 
   const authToken = window.localStorage.getItem("auth-token");
   const { data } = useFetch(
