@@ -9,7 +9,7 @@ export function Packages() {
   const [show, setShow] = useState(false);
   const handleShow = () => setShow(true);
   const [data, setData] = useState(null);
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
   useEffect(() => {
     fetch(
       "https://viaja-tech-backend.herokuapp.com/api/v1/packages?limit=10&page=1",
