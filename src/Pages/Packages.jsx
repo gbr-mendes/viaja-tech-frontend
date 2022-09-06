@@ -1,5 +1,4 @@
 import { Spinner } from "react-bootstrap";
-import { useFetch } from "../hooks/useFetch";
 import { Table } from "../components/Table";
 import { useState } from "react";
 import { AddPackageModal } from "../components/Modals/AddPackageModal";
@@ -30,7 +29,7 @@ export function Packages() {
         setLoading(false);
         setData(null);
       });
-  }, [show]);
+  }, [show, authToken]);
   return (
     <>
       <AddPackageModal show={show} onHide={() => setShow(false)} />
