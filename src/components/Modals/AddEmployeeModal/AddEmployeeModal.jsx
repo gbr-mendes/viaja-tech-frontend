@@ -1,0 +1,147 @@
+import Button from "react-bootstrap/Button";
+import Modal from "react-bootstrap/Modal";
+import Form from "react-bootstrap/Form";
+import Alert from "react-bootstrap/Alert";
+import { useState } from "react";
+
+export function AddPackageModal(props) {
+  const accessToken = localStorage.getItem("auth-token");
+  const [alert, setAlert] = useState(false);
+  const [alertClass, setAlertClass] = useState("danger");
+  const [alertMessage, setAlertMessage] = useState("");
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [phone, setPhone] = useState("");
+  const [cpf, setCpf] = useState("");
+  const [role, setRole] = useState("Sales Manager");
+  const [salary, setSalary] = useState(0);
+
+  const addPackage = (e) => {
+    fetch("https://viaja-tech-backend.herokuapp.com/api/v1/employee", {
+      method: "POST",
+      body: JSON.stringify({
+        userInfo: {
+          name,
+          email,
+          phone,
+          cpf,
+          password: "password",
+          confirmPassword: "password",
+        },
+        employeeInfo: {
+          position: role,
+          salary,
+        },
+      }),
+      headers: {
+        "Content-type": "application/json",
+        Authorization: `Bearer ${accessToken}`,
+      },
+    })
+      .then((resp) => resp.json())
+      .then(({ error }) => {
+        setAlert(true);
+        if (error) {
+          setAlertMessage(error);
+        } else {
+          setAlertClass("success");
+          setAlertMessage("Funcionário cadastrado com sucesso");
+          setName("");
+          setEmail("");
+          setPhone("");
+          setCpf("");
+          setSalary(0);
+        }
+      });
+  };
+
+  return (
+    <Modal
+      {...props}
+      size="lg"
+      aria-labelledby="contained-modal-title-vcenter"
+      centered
+    >
+      <Modal.Header closeButton>
+        <Modal.Title id="contained-modal-title-vcenter">
+          Adicionar Funcionário
+        </Modal.Title>
+      </Modal.Header>
+      <Modal.Body>
+        {alert && (
+          <Alert key={alertClass} variant={alertClass}>
+            {alertMessage}
+          </Alert>
+        )}
+        <Form>
+          <Form.Group className="mb-3">
+            <Form.Label>Nome</Form.Label>
+            <Form.Control
+              type="text"
+              placeholder="Nome do funcionário"
+              autoFocus
+              onChange={(e) => setName(e.target.value)}
+              value={name}
+            />
+          </Form.Group>
+
+          <Form.Group className="mb-3">
+            <Form.Label>Email</Form.Label>
+            <Form.Control
+              type="email"
+              placeholder="Email do funcionário"
+              onChange={(e) => setEmail(e.target.value)}
+              value={email}
+            />
+          </Form.Group>
+          <div className="d-flex flex-column flex-md-row justify-content-between">
+            <Form.Group className="mb-3 col-12 col-md-5 me-md-2">
+              <Form.Label>Telefone</Form.Label>
+              <Form.Control
+                type="text"
+                placeholder="Telefone do funcionário"
+                onChange={(e) => setPhone(e.target.value)}
+                value={phone}
+              />
+            </Form.Group>
+
+            <Form.Group className="mb-3 col-12 col-md-5 ms-md-2">
+              <Form.Label>CPF</Form.Label>
+              <Form.Control
+                type="text"
+                placeholder="CPF do funcionário"
+                onChange={(e) => setCpf(e.target.value)}
+                value={cpf}
+              />
+            </Form.Group>
+          </div>
+          <div className="d-flex flex-column flex-md-row justify-content-between">
+            <Form.Group className="mb-3 col-12 col-md-5 me-md-2">
+              <Form.Select
+                onChange={(e) => setRole(e.target.value)}
+                defaultValue={role}
+              >
+                <option value="Sales Manager" defaultChecked>
+                  Gerente de vendas
+                </option>
+                <option value="General Manager">Administrador Geral</option>
+                <option value="Content Manager">Gerente de conteúdo</option>
+              </Form.Select>
+            </Form.Group>
+            <Form.Group className="mb-3 col-12 col-md-5 ms-md-2 d-md-flex justify-content-md-between">
+              <Form.Label className=" pe-2 pt-2">Salário</Form.Label>
+              <Form.Control
+                type="number"
+                onChange={(e) => setSalary(e.target.value)}
+                value={salary}
+              />
+            </Form.Group>
+          </div>
+        </Form>
+      </Modal.Body>
+      <Modal.Footer>
+        <Button onClick={addPackage}>Adicionar Funcionário</Button>
+      </Modal.Footer>
+    </Modal>
+  );
+}

@@ -49,6 +49,11 @@ export function SideMenu() {
               icon="fa-regular fa-eye"
             />
             <Button
+              link="/dashboard/employee"
+              text="Employee"
+              icon="fa-solid fa-person-chalkboard"
+            />
+            <Button
               link="/dashboard/marketing"
               text="Marketing"
               icon="fa-solid fa-headphones-simple"

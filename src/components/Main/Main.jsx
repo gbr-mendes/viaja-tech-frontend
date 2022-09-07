@@ -9,6 +9,7 @@ import { Profile } from "../../Pages/Profile";
 import "./Main.css";
 import { Marketing } from "../../Pages/Marketing";
 import { Packages } from "../../Pages/Packages";
+import { Employee } from "../../Pages/Employee";
 
 export function Main() {
   return (
@@ -21,6 +22,7 @@ export function Main() {
             <Route path="/packages" element={<Packages />} />
             <Route path="/clients" element={<Clients />} />
             <Route path="/leads" element={<Leads />} />
+            <Route path="/employee" element={<Employee />} />
             <Route path="/marketing" element={<Marketing />} />
             <Route path="/profile" element={<Profile />} />
           </Routes>
