@@ -141,6 +141,14 @@ export function AddUpdateEmployeeModal(props) {
         </Form>
       </Modal.Body>
       <Modal.Footer className="d-flex justify-content-center">
+        {props.allowDelete && (
+          <Button
+            className="btn-danger"
+            onClick={() => console.log("Excluido")}
+          >
+            Excluir
+          </Button>
+        )}
         <Button onClick={addPackage}>{props.title}</Button>
       </Modal.Footer>
     </Modal>

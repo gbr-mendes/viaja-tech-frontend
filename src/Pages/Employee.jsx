@@ -16,6 +16,7 @@ export function Employee() {
   const [idFetchElement, setIdFetchElement] = useState(null);
   const [formData, setFormData] = useState(null);
   const [modalTitle, setModalTitle] = useState("Adicionar Funcionário");
+  const [allowDeleteAtt, setAllowDeleteAtt] = useState(false);
 
   useEffect(() => {
     if (idFetchElement) {
@@ -26,6 +27,7 @@ export function Employee() {
         .then((resp) => resp.json())
         .then((data) => {
           setFormData(data);
+          setAllowDeleteAtt(true);
           handleShow();
         });
     }
@@ -57,12 +59,14 @@ export function Employee() {
         onHide={() => setShow(false)}
         title={modalTitle}
         data={formData}
+        allowDelete={allowDeleteAtt}
       />
       <div className="d-flex flex-column flex-md-row justify-content-center align-items-center">
         <h1>Funcionários</h1>
         <button
           className="btn btn-primary ms-md-5"
           onClick={() => {
+            setAllowDeleteAtt(false);
             handleShow();
             setModalTitle("Adicionar Funcionário");
             setFormData(null);
