@@ -4,7 +4,7 @@ import Form from "react-bootstrap/Form";
 import Alert from "react-bootstrap/Alert";
 import { useState } from "react";
 
-export function AddPackageModal(props) {
+export function AddUpdateEmployeeModal(props) {
   const accessToken = localStorage.getItem("auth-token");
   const [alert, setAlert] = useState(false);
   const [alertClass, setAlertClass] = useState("danger");
@@ -15,6 +15,7 @@ export function AddPackageModal(props) {
   const [cpf, setCpf] = useState("");
   const [role, setRole] = useState("Sales Manager");
   const [salary, setSalary] = useState(0);
+  const formData = props.data || {};
 
   const addPackage = (e) => {
     fetch("https://viaja-tech-backend.herokuapp.com/api/v1/employee", {
@@ -64,7 +65,7 @@ export function AddPackageModal(props) {
     >
       <Modal.Header closeButton>
         <Modal.Title id="contained-modal-title-vcenter">
-          Adicionar Funcionário
+          {props.title}
         </Modal.Title>
       </Modal.Header>
       <Modal.Body>
@@ -81,7 +82,7 @@ export function AddPackageModal(props) {
               placeholder="Nome do funcionário"
               autoFocus
               onChange={(e) => setName(e.target.value)}
-              value={name}
+              value={formData.name || name}
             />
           </Form.Group>
 
@@ -91,7 +92,7 @@ export function AddPackageModal(props) {
               type="email"
               placeholder="Email do funcionário"
               onChange={(e) => setEmail(e.target.value)}
-              value={email}
+              value={formData.email || email}
             />
           </Form.Group>
           <div className="d-flex flex-column flex-md-row justify-content-between">
@@ -101,7 +102,7 @@ export function AddPackageModal(props) {
                 type="text"
                 placeholder="Telefone do funcionário"
                 onChange={(e) => setPhone(e.target.value)}
-                value={phone}
+                value={formData.phone || phone}
               />
             </Form.Group>
 
@@ -111,7 +112,7 @@ export function AddPackageModal(props) {
                 type="text"
                 placeholder="CPF do funcionário"
                 onChange={(e) => setCpf(e.target.value)}
-                value={cpf}
+                value={formData.cpf || cpf}
               />
             </Form.Group>
           </div>
@@ -133,14 +134,14 @@ export function AddPackageModal(props) {
               <Form.Control
                 type="number"
                 onChange={(e) => setSalary(e.target.value)}
-                value={salary}
+                value={formData.salary || salary}
               />
             </Form.Group>
           </div>
         </Form>
       </Modal.Body>
-      <Modal.Footer>
-        <Button onClick={addPackage}>Adicionar Funcionário</Button>
+      <Modal.Footer className="d-flex justify-content-center">
+        <Button onClick={addPackage}>{props.title}</Button>
       </Modal.Footer>
     </Modal>
   );
