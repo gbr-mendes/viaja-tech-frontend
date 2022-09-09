@@ -7,9 +7,30 @@ import { useEffect } from "react";
 export function Packages() {
   const authToken = localStorage.getItem("auth-token");
   const [show, setShow] = useState(false);
-  const handleShow = () => setShow(true);
+  const [modalTitle, setModalTitle] = useState("Adicionar Pacote");
+  const [idFetchElement, setIdFetchElement] = useState(null);
   const [data, setData] = useState(null);
+  const [formData, setFormData] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [allowDeleteAtt, setAllowDeleteAtt] = useState(true);
+  const handleShow = (e) => {
+    setModalTitle("Atualizar Pacote");
+    setShow(true);
+  };
+  useEffect(() => {
+    if (idFetchElement) {
+      fetch(
+        `https://viaja-tech-backend.herokuapp.com/api/v1/packages/${idFetchElement}`,
+        { headers: { Authorization: `Bearer ${authToken}` } }
+      )
+        .then((resp) => resp.json())
+        .then((data) => {
+          setFormData(data);
+          handleShow();
+        });
+    }
+  }, [idFetchElement, authToken]);
+
   useEffect(() => {
     fetch(
       "https://viaja-tech-backend.herokuapp.com/api/v1/packages?limit=10&page=1",
@@ -32,10 +53,27 @@ export function Packages() {
   }, [show, authToken]);
   return (
     <>
-      <AddPackageModal show={show} onHide={() => setShow(false)} />
+      <AddPackageModal
+        show={show}
+        onHide={() => {
+          setShow(false);
+          setAllowDeleteAtt(true);
+        }}
+        title={modalTitle}
+        data={formData}
+        allowDelete={allowDeleteAtt}
+      />
       <div className="d-flex flex-column flex-md-row justify-content-center align-items-center">
         <h1>Pacotes</h1>
-        <button className="btn btn-primary ms-md-5" onClick={handleShow}>
+        <button
+          className="btn btn-primary ms-md-5"
+          onClick={() => {
+            setAllowDeleteAtt(false);
+            handleShow();
+            setModalTitle("Adicionar Pacote");
+            setFormData(null);
+          }}
+        >
           Adicionar Pacote
         </button>
       </div>
@@ -45,7 +83,11 @@ export function Packages() {
         </Spinner>
       )}
       {data && (
-        <Table fields={["title", "valuePerDay"]} rowsData={data.results} />
+        <Table
+          fields={["title", "valuePerDay"]}
+          rowsData={data.results}
+          setIdMethod={setIdFetchElement}
+        />
       )}
     </>
   );

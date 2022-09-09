@@ -7,16 +7,17 @@ import { useEffect } from "react";
 export function Employee() {
   const authToken = localStorage.getItem("auth-token");
   const [show, setShow] = useState(false);
-  const handleShow = (e) => {
-    setModalTitle("Atualizar Funcionário");
-    setShow(true);
-  };
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [idFetchElement, setIdFetchElement] = useState(null);
   const [formData, setFormData] = useState(null);
   const [modalTitle, setModalTitle] = useState("Adicionar Funcionário");
   const [allowDeleteAtt, setAllowDeleteAtt] = useState(false);
+
+  const handleShow = (e) => {
+    setModalTitle("Atualizar Funcionário");
+    setShow(true);
+  };
 
   useEffect(() => {
     if (idFetchElement) {

@@ -12,6 +12,8 @@ export function AddPackageModal(props) {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [valuePerDay, setValuePerDay] = useState(0);
+  const formData = props.data || {};
+  const allowDelete = props.allowDelete;
 
   const addPackage = (e) => {
     fetch("https://viaja-tech-backend.herokuapp.com/api/v1/packages", {
@@ -67,7 +69,7 @@ export function AddPackageModal(props) {
               placeholder="Título do pacote"
               autoFocus
               onChange={(e) => setTitle(e.target.value)}
-              value={title}
+              value={formData.title || title}
             />
           </Form.Group>
           <Form.Group
@@ -79,7 +81,7 @@ export function AddPackageModal(props) {
               as="textarea"
               rows={5}
               onChange={(e) => setDescription(e.target.value)}
-              value={description}
+              value={formData.description || description}
             />
           </Form.Group>
           <Form.Group className="mb-3" controlId="addPackageForm.ControlInput2">
@@ -87,12 +89,20 @@ export function AddPackageModal(props) {
             <Form.Control
               type="number"
               onChange={(e) => setValuePerDay(e.target.value)}
-              value={valuePerDay}
+              value={formData.valuePerDay || valuePerDay}
             />
           </Form.Group>
         </Form>
       </Modal.Body>
-      <Modal.Footer>
+      <Modal.Footer className="d-flex justify-content-center">
+        {allowDelete && (
+          <Button
+            className="btn-danger"
+            onClick={() => console.log("Excluido")}
+          >
+            Excluir
+          </Button>
+        )}
         <Button onClick={addPackage}>Adicionar Pacote</Button>
       </Modal.Footer>
     </Modal>

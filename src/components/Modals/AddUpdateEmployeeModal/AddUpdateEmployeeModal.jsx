@@ -16,6 +16,7 @@ export function AddUpdateEmployeeModal(props) {
   const [role, setRole] = useState("Sales Manager");
   const [salary, setSalary] = useState(0);
   const formData = props.data || {};
+  const allowDelete = props.allowDelete;
 
   const addPackage = (e) => {
     fetch("https://viaja-tech-backend.herokuapp.com/api/v1/employee", {
@@ -141,7 +142,7 @@ export function AddUpdateEmployeeModal(props) {
         </Form>
       </Modal.Body>
       <Modal.Footer className="d-flex justify-content-center">
-        {props.allowDelete && (
+        {allowDelete && (
           <Button
             className="btn-danger"
             onClick={() => console.log("Excluido")}
