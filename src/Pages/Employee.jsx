@@ -3,6 +3,7 @@ import { Table } from "../components/Table";
 import { useState } from "react";
 import { AddUpdateEmployeeModal } from "../components/Modals/AddUpdateEmployeeModal";
 import { useEffect } from "react";
+import { fetchGet } from "../utils/FetchGet/FetchGet";
 
 export function Employee() {
   const authToken = localStorage.getItem("auth-token");
@@ -13,46 +14,37 @@ export function Employee() {
   const [formData, setFormData] = useState(null);
   const [modalTitle, setModalTitle] = useState("Adicionar Funcionário");
   const [allowDeleteAtt, setAllowDeleteAtt] = useState(false);
-
+  const baseUrl = "https://viaja-tech-backend.herokuapp.com/api/v1/employee/";
   const handleShow = (e) => {
     setModalTitle("Atualizar Funcionário");
     setShow(true);
   };
 
   useEffect(() => {
-    if (idFetchElement) {
-      fetch(
-        `https://viaja-tech-backend.herokuapp.com/api/v1/employee/${idFetchElement}`,
-        { headers: { Authorization: `Bearer ${authToken}` } }
-      )
-        .then((resp) => resp.json())
-        .then((data) => {
-          setFormData(data);
-          setAllowDeleteAtt(true);
-          handleShow();
-        });
+    async function fetchData() {
+      if (idFetchElement) {
+        const data = await fetchGet(`${baseUrl}/${idFetchElement}`, authToken);
+        setFormData(data);
+        setAllowDeleteAtt(true);
+        handleShow();
+      }
     }
+    fetchData();
   }, [idFetchElement, authToken]);
+
   useEffect(() => {
-    fetch(
-      "https://viaja-tech-backend.herokuapp.com/api/v1/employee?limit=10&page=1",
-      { method: "GET", headers: { Authorization: `Bearer ${authToken}` } }
-    )
-      .then((res) => {
-        if (!res.ok) {
-          throw Error("Could not fetch the data for that resourse");
-        }
-        return res.json();
-      })
-      .then((data) => {
-        setLoading(false);
-        setData(data);
-      })
-      .catch((err) => {
-        setLoading(false);
+    async function fetchData() {
+      const data = await fetchGet(`${baseUrl}?limit=10&page=1`, authToken);
+      setLoading(false);
+      if (!data || data.error) {
         setData(null);
-      });
+      } else {
+        setData(data);
+      }
+    }
+    fetchData();
   }, [authToken]);
+
   return (
     <>
       <AddUpdateEmployeeModal
