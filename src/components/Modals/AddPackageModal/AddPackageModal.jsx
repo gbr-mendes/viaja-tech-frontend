@@ -3,6 +3,8 @@ import Modal from "react-bootstrap/Modal";
 import Form from "react-bootstrap/Form";
 import Alert from "react-bootstrap/Alert";
 import { useState } from "react";
+import { fetchDelete } from "../../../utils/FetchDelete";
+import { fetchPost } from "../../../utils/FetchPost";
 
 export function AddPackageModal(props) {
   const accessToken = localStorage.getItem("auth-token");
@@ -15,32 +17,33 @@ export function AddPackageModal(props) {
   const formData = props.data || {};
   const allowDelete = props.allowDelete;
 
-  const addPackage = (e) => {
-    fetch("https://viaja-tech-backend.herokuapp.com/api/v1/packages", {
-      method: "POST",
-      body: JSON.stringify({
+  const baseUrl = "https://viaja-tech-backend.herokuapp.com/api/v1/packages";
+  const deletePackage = async (e) => {
+    await fetchDelete(`${baseUrl}/${formData._id}`, accessToken);
+    props.onHide();
+  };
+
+  const addPackage = async (e) => {
+    const resp = await fetchPost(
+      baseUrl,
+      {
         title,
         description,
         valuePerDay,
-      }),
-      headers: {
-        "Content-type": "application/json",
-        Authorization: `Bearer ${accessToken}`,
       },
-    })
-      .then((resp) => resp.json())
-      .then(({ error }) => {
-        setAlert(true);
-        if (error) {
-          setAlertMessage(error);
-        } else {
-          setAlertClass("success");
-          setAlertMessage("Pacote adicionado com sucesso");
-          setTitle("");
-          setDescription("");
-          setValuePerDay("");
-        }
-      });
+      accessToken
+    );
+    setAlert(true);
+    if (resp.error) {
+      setAlertMessage(resp.error);
+      setAlertClass("danger");
+    } else {
+      setAlertClass("success");
+      setAlertMessage("Pacote adicionado com sucesso");
+      setTitle("");
+      setDescription("");
+      setValuePerDay("");
+    }
   };
 
   return (
@@ -96,10 +99,7 @@ export function AddPackageModal(props) {
       </Modal.Body>
       <Modal.Footer className="d-flex justify-content-center">
         {allowDelete && (
-          <Button
-            className="btn-danger"
-            onClick={() => console.log("Excluido")}
-          >
+          <Button className="btn-danger" onClick={deletePackage}>
             Excluir
           </Button>
         )}
