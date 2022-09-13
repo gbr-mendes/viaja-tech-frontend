@@ -3,6 +3,8 @@ import Modal from "react-bootstrap/Modal";
 import Form from "react-bootstrap/Form";
 import Alert from "react-bootstrap/Alert";
 import { useState } from "react";
+import { fetchPost } from "../../../utils/FetchPost";
+import { fetchDelete } from "../../../utils/FetchDelete";
 
 export function AddUpdateEmployeeModal(props) {
   const accessToken = localStorage.getItem("auth-token");
@@ -17,11 +19,17 @@ export function AddUpdateEmployeeModal(props) {
   const [salary, setSalary] = useState(0);
   const formData = props.data || {};
   const allowDelete = props.allowDelete;
+  const baseUrl = "http://localhost:3001/api/v1/employee";
+  const deleteEmployee = async (e) => {
+    console.log(formData);
+    await fetchDelete(`${baseUrl}/${formData._id}`, accessToken);
+    props.onHide();
+  };
 
-  const addPackage = (e) => {
-    fetch("https://viaja-tech-backend.herokuapp.com/api/v1/employee", {
-      method: "POST",
-      body: JSON.stringify({
+  const addEmployee = async (e) => {
+    const resp = await fetchPost(
+      baseUrl,
+      {
         userInfo: {
           name,
           email,
@@ -34,27 +42,22 @@ export function AddUpdateEmployeeModal(props) {
           position: role,
           salary,
         },
-      }),
-      headers: {
-        "Content-type": "application/json",
-        Authorization: `Bearer ${accessToken}`,
       },
-    })
-      .then((resp) => resp.json())
-      .then(({ error }) => {
-        setAlert(true);
-        if (error) {
-          setAlertMessage(error);
-        } else {
-          setAlertClass("success");
-          setAlertMessage("Funcionário cadastrado com sucesso");
-          setName("");
-          setEmail("");
-          setPhone("");
-          setCpf("");
-          setSalary(0);
-        }
-      });
+      accessToken
+    );
+
+    if (resp.error) {
+      setAlertClass("danger");
+      setAlertMessage(resp.error);
+    } else {
+      setAlertClass("success");
+      setAlertMessage("Funcionário cadastrado com sucesso");
+      setName("");
+      setEmail("");
+      setPhone("");
+      setCpf("");
+      setSalary(0);
+    }
   };
 
   return (
@@ -143,14 +146,11 @@ export function AddUpdateEmployeeModal(props) {
       </Modal.Body>
       <Modal.Footer className="d-flex justify-content-center">
         {allowDelete && (
-          <Button
-            className="btn-danger"
-            onClick={() => console.log("Excluido")}
-          >
+          <Button className="btn-danger" onClick={deleteEmployee}>
             Excluir
           </Button>
         )}
-        <Button onClick={addPackage}>{props.title}</Button>
+        <Button onClick={addEmployee}>{props.title}</Button>
       </Modal.Footer>
     </Modal>
   );

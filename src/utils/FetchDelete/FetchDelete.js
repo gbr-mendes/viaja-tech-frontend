@@ -2,7 +2,7 @@ export function fetchDelete(url, authToken) {
   if (authToken !== undefined) {
     const respData = fetch(url, {
       method: "DELETE",
-      headers: { Authorization: `Berear ${authToken}` },
+      headers: { authorization: `Berear ${authToken}` },
     })
       .then((resp) => resp.json())
       .then((data) => data);

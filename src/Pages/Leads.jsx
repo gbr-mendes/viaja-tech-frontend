@@ -4,7 +4,7 @@ import { Table } from "../components/Table";
 export function Leads() {
   const authToken = localStorage.getItem("auth-token");
   const { data, loading } = useFetch(
-    "https://viaja-tech-backend.herokuapp.com/api/v1/leads?limit=10&page=1",
+    `${process.env.REACT_APP_API_DOAMIN}/leads`,
     authToken
   );
   return (

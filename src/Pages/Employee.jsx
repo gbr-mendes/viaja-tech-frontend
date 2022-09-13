@@ -14,7 +14,7 @@ export function Employee() {
   const [formData, setFormData] = useState(null);
   const [modalTitle, setModalTitle] = useState("Adicionar Funcionário");
   const [allowDeleteAtt, setAllowDeleteAtt] = useState(false);
-  const baseUrl = "https://viaja-tech-backend.herokuapp.com/api/v1/employee/";
+  const baseUrl = `${process.env.REACT_APP_API_DOAMIN}/employee/`;
   const handleShow = (e) => {
     setModalTitle("Atualizar Funcionário");
     setShow(true);
@@ -30,11 +30,11 @@ export function Employee() {
       }
     }
     fetchData();
-  }, [idFetchElement, authToken]);
+  }, [idFetchElement, authToken, baseUrl]);
 
   useEffect(() => {
     async function fetchData() {
-      const data = await fetchGet(`${baseUrl}?limit=10&page=1`, authToken);
+      const data = await fetchGet(baseUrl, authToken);
       setLoading(false);
       if (!data || data.error) {
         setData(null);
@@ -43,7 +43,7 @@ export function Employee() {
       }
     }
     fetchData();
-  }, [authToken]);
+  }, [authToken, show, baseUrl]);
 
   return (
     <>

@@ -20,7 +20,7 @@ export function LoginForm() {
 
   const handleLogin = (e) => {
     e.preventDefault();
-    fetch("https://viaja-tech-backend.herokuapp.com/api/v1/users/login", {
+    fetch(`${process.env.REACT_APP_API_DOAMIN}/users/login`, {
       method: "POST",
       body: JSON.stringify({
         email: inputEmail,

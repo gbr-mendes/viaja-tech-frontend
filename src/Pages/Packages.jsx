@@ -32,10 +32,10 @@ export function Packages() {
   }, [idFetchElement, authToken]);
 
   useEffect(() => {
-    fetch(
-      "https://viaja-tech-backend.herokuapp.com/api/v1/packages?limit=10&page=1",
-      { method: "GET", headers: { Authorization: `Bearer ${authToken}` } }
-    )
+    fetch(`${process.env.REACT_APP_API_DOAMIN}/packages`, {
+      method: "GET",
+      headers: { Authorization: `Bearer ${authToken}` },
+    })
       .then((res) => {
         if (!res.ok) {
           throw Error("Could not fetch the data for that resourse");
