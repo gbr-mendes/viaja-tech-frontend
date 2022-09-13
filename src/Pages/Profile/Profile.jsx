@@ -51,15 +51,24 @@ export function Profile() {
   return (
     <div className="d-flex align-items-center flex-column">
       <div className="d-flex justify-content-center">
-        <h1>Profile Page</h1>
+        <h1>Meu Perfil</h1>
       </div>
       <div className="d-flex flex-column flex-md-row justify-content-center align-items-center profile-container">
-        <div className="avatar d-flex flex-column justify-content-center align-items-center p-2">
-          <Image src={avatar ? avatar : unknown} roundedCircle />
-          <label for="input-file" className="choose-file">
-            Selecione uma imagem
-            <input id="input-file" type="file" onChange={updateAvatar} />
-          </label>
+        <div className="avatar d-flex flex-column justify-content-center align-items-center p-0 p-md-2">
+          <div className="d-flex flex-row flex-md-column justify-content-center align-items-center mb-4 mb-md-0">
+            <Image
+              src={avatar ? avatar : unknown}
+              roundedCircle
+              className="me-5 me-md-0"
+            />
+            <label
+              for="input-file"
+              className="choose-file text-white d-flex justify-content-center align-items-center h-25"
+            >
+              Atualizar
+              <input id="input-file" type="file" onChange={updateAvatar} />
+            </label>
+          </div>
           {alertShow && (
             <Alert key={alertClass} variant={alertClass}>
               {alertMessage}

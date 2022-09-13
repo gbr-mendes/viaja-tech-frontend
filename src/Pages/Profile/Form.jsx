@@ -15,7 +15,7 @@ export function Form({ name, email, phone, cpf }) {
     const authToken = localStorage.getItem("auth-token");
     const data = { name: inputName, email: inputEmail, phone: inputPhone };
 
-    fetch(`${process.env.REACT_APP_API_DOAMIN}/users/users/update`, {
+    fetch(`${process.env.REACT_APP_API_DOAMIN}/users/update`, {
       method: "PATCH",
       body: JSON.stringify(data),
       headers: {
@@ -37,13 +37,13 @@ export function Form({ name, email, phone, cpf }) {
   }
 
   return (
-    <form className="profile-form p-4" onSubmit={handleSubmit}>
+    <form className="profile-form p-0 p-md-4" onSubmit={handleSubmit}>
       {alertShow && (
         <Alert key={alertClass} variant={alertClass}>
           {alertMessage}
         </Alert>
       )}
-      <div className="mb-3">
+      <div className="mb-1 mb-md-3 col-12">
         <label for="name" className="form-label">
           Nome
         </label>
@@ -56,7 +56,7 @@ export function Form({ name, email, phone, cpf }) {
           onChange={(e) => setIntputName(e.target.value)}
         />
       </div>
-      <div className="mb-3">
+      <div className="mb-1 mb-md-3 col-12">
         <label for="email" className="form-label">
           Email
         </label>
@@ -70,7 +70,7 @@ export function Form({ name, email, phone, cpf }) {
         />
       </div>
       <div className="row">
-        <div className="mb-3 col-5">
+        <div className="mb-1 mb-md-3 col-12 col-md-6">
           <label for="phone" className="form-label">
             Phone
           </label>
@@ -82,7 +82,7 @@ export function Form({ name, email, phone, cpf }) {
             onChange={(e) => setInputPhone(e.target.value)}
           />
         </div>
-        <div className="mb-3 col-5">
+        <div className="mb-1 mb-md-3 col-12 col-md-6">
           <label for="cpf" className="form-label">
             CPF
           </label>
@@ -96,7 +96,7 @@ export function Form({ name, email, phone, cpf }) {
         </div>
       </div>
       <div className="d-flex justify-content-center">
-        <button type="submit" className="btn button">
+        <button type="submit" className="btn button text-white">
           Salvar alterações
         </button>
       </div>
