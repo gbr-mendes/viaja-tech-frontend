@@ -19,28 +19,28 @@ export function ReadLeadModal(props) {
         </Modal.Header>
         <Modal.Body>
           <Form>
-            <Form.Group className="mb-3 d-flex">
-              <div className="d-flex flex-column col-6 me-1">
+            <Form.Group className="mb-3 d-flex flex-column flex-lg-row">
+              <div className="d-flex flex-column col-12 col-lg-6 me-1">
                 <Form.Label>Nome</Form.Label>
                 <Form.Control type="text" value={formData.name} disabled />
               </div>
-              <div className="d-flex flex-column col-6 ms-1">
+              <div className="d-flex flex-column col-12 col-lg-6 ms-1">
                 <Form.Label>Email</Form.Label>
                 <Form.Control type="email" value={formData.email} disabled />
               </div>
             </Form.Group>
-            <Form.Group className="mb-3 d-flex">
-              <div className="d-flex flex-column col-6 me-1">
+            <Form.Group className="mb-3 d-flex flex-column flex-lg-row">
+              <div className="d-flex flex-column col-12 col-lg-6 me-1">
                 <Form.Label>CPF</Form.Label>
                 <Form.Control type="text" value={formData.cpf} disabled />
               </div>
-              <div className="d-flex flex-column col-6 ms-1">
+              <div className="d-flex flex-column col-12 col-lg-6 ms-1">
                 <Form.Label>Telefone</Form.Label>
                 <Form.Control type="email" value={formData.phone} disabled />
               </div>
             </Form.Group>
-            <Form.Group className="mb-3 d-flex">
-              <div className="d-flex flex-column col-6 me-1">
+            <Form.Group className="mb-3 d-flex flex-column flex-lg-row">
+              <div className="d-flex flex-column col-12 col-lg-6 me-1">
                 <Form.Label>Qtd. de visitas ao website</Form.Label>
                 <Form.Control
                   type="number"
@@ -48,7 +48,7 @@ export function ReadLeadModal(props) {
                   disabled
                 />
               </div>
-              <div className="d-flex flex-column col-6 ms-1">
+              <div className="d-flex flex-column col-12 col-lg-6 ms-1">
                 <Form.Label>Destino mais visualizado</Form.Label>
                 <Form.Control
                   type="email"
@@ -57,7 +57,7 @@ export function ReadLeadModal(props) {
                 />
               </div>
             </Form.Group>
-            <Form.Group className="mb-3 d-flex">
+            <Form.Group className="mb-3 d-flex flex-column flex-lg-row">
               <div className="d-flex flex-column col-12 me-1">
                 <Form.Label>Destinos pesquisados</Form.Label>
                 <ListGroup>
