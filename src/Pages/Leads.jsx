@@ -9,7 +9,7 @@ import { fetchGet } from "../utils/FetchGet";
 export function Leads() {
   const authToken = localStorage.getItem("auth-token");
   const [idFetchElement, setIdFetchElement] = useState(null);
-  const [show, setShow] = useState(true);
+  const [show, setShow] = useState(false);
   const [modalData, setModalData] = useState(null);
   const { data, loading } = useFetch(
     `${process.env.REACT_APP_API_DOAMIN}/leads`,
@@ -23,19 +23,18 @@ export function Leads() {
     async function fetchData() {
       if (idFetchElement) {
         const data = await fetchGet(`${baseUrl}/${idFetchElement}`, authToken);
-        console.log(data);
         setModalData(data);
         handleShow();
       }
     }
     fetchData();
   }, [idFetchElement, authToken, baseUrl]);
+
   return (
     <>
       <ReadLeadModal
         show={show}
         onHide={() => setShow(false)}
-        title="teste"
         data={modalData}
       />
       <div className="d-flex justify-content-center">
