@@ -45,7 +45,7 @@ export function AddUpdateEmployeeModal(props) {
       },
       accessToken
     );
-
+    setAlert(true);
     if (resp.error) {
       setAlertClass("danger");
       setAlertMessage(resp.error);
