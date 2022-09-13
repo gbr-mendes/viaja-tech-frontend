@@ -19,10 +19,9 @@ export function Packages() {
   };
   useEffect(() => {
     if (idFetchElement) {
-      fetch(
-        `https://viaja-tech-backend.herokuapp.com/api/v1/packages/${idFetchElement}`,
-        { headers: { Authorization: `Bearer ${authToken}` } }
-      )
+      fetch(`${process.env.REACT_APP_API_DOAMIN}/packages/${idFetchElement}`, {
+        headers: { Authorization: `Bearer ${authToken}` },
+      })
         .then((resp) => resp.json())
         .then((data) => {
           setFormData(data);

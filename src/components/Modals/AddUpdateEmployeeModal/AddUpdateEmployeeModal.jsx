@@ -19,7 +19,7 @@ export function AddUpdateEmployeeModal(props) {
   const [salary, setSalary] = useState(0);
   const formData = props.data || {};
   const allowDelete = props.allowDelete;
-  const baseUrl = "http://localhost:3001/api/v1/employee";
+  const baseUrl = `${process.env.REACT_APP_API_DOAMIN}/employee`;
   const deleteEmployee = async (e) => {
     console.log(formData);
     await fetchDelete(`${baseUrl}/${formData._id}`, accessToken);

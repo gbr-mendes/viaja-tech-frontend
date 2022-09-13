@@ -12,7 +12,7 @@ export function IndexPage() {
 
   const authToken = window.localStorage.getItem("auth-token");
   const { data } = useFetch(
-    "https://viaja-tech-backend.herokuapp.com/api/v1/users/me",
+    `${process.env.REACT_APP_API_DOAMIN}/users/me`,
     authToken
   );
   useEffect(() => {

@@ -24,7 +24,7 @@ export function Register() {
 
   const handleRegister = (e) => {
     e.preventDefault();
-    fetch("https://viaja-tech-backend.herokuapp.com/api/v1/users/register", {
+    fetch(`${process.env.REACT_APP_API_DOAMIN}/users/register`, {
       method: "POST",
       body: JSON.stringify({
         name: inputName,

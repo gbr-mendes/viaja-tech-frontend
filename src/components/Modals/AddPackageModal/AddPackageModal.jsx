@@ -17,7 +17,7 @@ export function AddPackageModal(props) {
   const formData = props.data || {};
   const allowDelete = props.allowDelete;
 
-  const baseUrl = "https://viaja-tech-backend.herokuapp.com/api/v1/packages";
+  const baseUrl = `${process.env.REACT_APP_API_DOAMIN}/packages`;
   const deletePackage = async (e) => {
     await fetchDelete(`${baseUrl}/${formData._id}`, accessToken);
     props.onHide();
