@@ -19,7 +19,7 @@ export function Packages() {
   };
   useEffect(() => {
     if (idFetchElement) {
-      fetch(`${process.env.REACT_APP_API_DOAMIN}/packages/${idFetchElement}`, {
+      fetch(`${process.env.REACT_APP_API_DOMAIN}/packages/${idFetchElement}`, {
         headers: { Authorization: `Bearer ${authToken}` },
       })
         .then((resp) => resp.json())
@@ -31,7 +31,7 @@ export function Packages() {
   }, [idFetchElement, authToken]);
 
   useEffect(() => {
-    fetch(`${process.env.REACT_APP_API_DOAMIN}/packages`, {
+    fetch(`${process.env.REACT_APP_API_DOMAIN}/packages`, {
       method: "GET",
       headers: { Authorization: `Bearer ${authToken}` },
     })

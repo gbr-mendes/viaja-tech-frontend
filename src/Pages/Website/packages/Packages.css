@@ -11,3 +11,9 @@
 .package-price{
     color: #02AF66;
 }
+a {
+    text-decoration: none;
+}
+a:hover{
+    text-decoration: none;
+}

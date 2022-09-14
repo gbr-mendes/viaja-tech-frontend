@@ -24,7 +24,7 @@ export function Profile() {
     const authToken = localStorage.getItem("auth-token");
     const formData = new FormData();
     formData.append("image", e.target.files[0]);
-    fetch(`${process.env.REACT_APP_API_DOAMIN}/users/avatar`, {
+    fetch(`${process.env.REACT_APP_API_DOMAIN}/users/avatar`, {
       method: "PUT",
       body: formData,
       headers: {

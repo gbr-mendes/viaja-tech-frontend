@@ -21,7 +21,7 @@ export function AddUpdateEmployeeModal(props) {
   const [salary, setSalary] = useState(0);
   const formData = props.data || {};
   const allowDelete = props.allowDelete;
-  const baseUrl = `${process.env.REACT_APP_API_DOAMIN}/employee`;
+  const baseUrl = `${process.env.REACT_APP_API_DOMAIN}/employee`;
   const options = ["Sales Manager", "General Manager", "Content Manager"];
 
   useEffect(() => {

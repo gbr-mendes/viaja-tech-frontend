@@ -1,42 +1,62 @@
+import { useState } from "react";
+import { useEffect } from "react";
+import { useParams } from "react-router-dom";
+import { fetchGet } from "../../../utils/FetchGet";
+import { Spinner } from "react-bootstrap";
 import packageImage from "./img/air-craft.jpg";
 
 export function Package(props) {
+  const { packageId } = useParams();
+  const [pack, setPack] = useState(null);
+  const { loading, setLoading } = useState(true);
+
+  useEffect(() => {
+    async function fetchData() {
+      const url = `${process.env.REACT_APP_API_DOMAIN}/packages/${packageId}`;
+      const packageData = await fetchGet(url);
+      setPack(packageData);
+      setLoading(true);
+    }
+    fetchData();
+  }, [packageId, setLoading]);
+
   return (
     <>
-      <section id="package-section" className="bg-white">
-        <div className="section-title d-flex justify-content-center align-items-center flex-column p-5 mt-5 mt-md-0 mb-0">
-          <div className="package-title">
-            <h2>Las Vegas</h2>
-          </div>
-          <p className="display-lead text-center">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Excepturi
-            libero quo quaerat tempore architecto.
-          </p>
-        </div>
-        <container className="packages-container d-flex align-items-center justify-content-center p-5">
-          <div className="package-image d-flex d-md-block align-items-center justify-content-center">
-            <img
-              src={packageImage}
-              className="img-thumbnail rounded w-75 mb-4 mb-lg-0"
-              alt=""
-            />
-            <div className="package-price mt-3">
-              <h4>R$ 2000.00</h4>
+      {loading && (
+        <Spinner animation="border" role="status">
+          <span className="visually-hidden">Loading...</span>
+        </Spinner>
+      )}
+      {pack && (
+        <section id="package-section" className="bg-white">
+          <div className="section-title d-flex justify-content-center align-items-center flex-column p-5 mt-5 mt-md-0 mb-0">
+            <div className="package-title">
+              <h2>{pack.title}</h2>
             </div>
+            <p className="display-lead text-center">{pack.shortDescription}</p>
           </div>
-          <div className="package-description col-7">
-            <div className="pacakge-extract text-muted">
-              Lorem ipsum dolor sit amet consectetur, adipisicing elit. Hic
-              saepe similique, cumque corporis quam soluta et fuga, error
-              impedit laborum accusantium illum quis perspiciatis totam natus
-              fugiat labore aperiam quibusdam.
+          <container className="packages-container d-flex align-items-center justify-content-center p-5">
+            <div className="package-image d-flex d-md-block align-items-center justify-content-center">
+              <img
+                src={packageImage}
+                className="img-thumbnail rounded w-75 mb-4 mb-lg-0"
+                alt=""
+              />
+              <div className="package-price mt-3">
+                <h4>R$ {pack.valuePerDay}/day</h4>
+              </div>
             </div>
+            <div className="package-description col-7">
+              <div className="pacakge-extract text-muted">
+                {pack.description}
+              </div>
+            </div>
+          </container>
+          <div className="checkout-button d-flex justify-content-center">
+            <button className="btn btn-primary">COMPRAR AGORA</button>
           </div>
-        </container>
-        <div className="checkout-button d-flex justify-content-center">
-          <button className="btn btn-primary">COMPRAR AGORA</button>
-        </div>
-      </section>
+        </section>
+      )}
     </>
   );
 }

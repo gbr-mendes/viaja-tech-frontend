@@ -15,7 +15,7 @@ function App() {
       if (user) {
         const { _id: userId } = user.userInfo;
         const resp = await fetchGet(
-          `${process.env.REACT_APP_API_DOAMIN}/business/append-visite/${userId}`
+          `${process.env.REACT_APP_API_DOMAIN}/business/append-visite/${userId}`
         );
         console.log(resp);
       }

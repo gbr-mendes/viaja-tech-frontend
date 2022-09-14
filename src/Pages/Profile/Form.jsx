@@ -15,7 +15,7 @@ export function Form({ name, email, phone, cpf }) {
     const authToken = localStorage.getItem("auth-token");
     const data = { name: inputName, email: inputEmail, phone: inputPhone };
 
-    fetch(`${process.env.REACT_APP_API_DOAMIN}/users/update`, {
+    fetch(`${process.env.REACT_APP_API_DOMAIN}/users/update`, {
       method: "PATCH",
       body: JSON.stringify(data),
       headers: {

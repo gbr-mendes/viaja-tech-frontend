@@ -20,7 +20,7 @@ export function LoginForm() {
 
   const handleLogin = (e) => {
     e.preventDefault();
-    fetch(`${process.env.REACT_APP_API_DOAMIN}/users/login`, {
+    fetch(`${process.env.REACT_APP_API_DOMAIN}/users/login`, {
       method: "POST",
       body: JSON.stringify({
         email: inputEmail,

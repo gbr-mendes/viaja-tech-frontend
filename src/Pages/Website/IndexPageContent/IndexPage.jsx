@@ -12,7 +12,7 @@ export function IndexPage() {
 
   const authToken = window.localStorage.getItem("auth-token");
   const { data } = useFetch(
-    `${process.env.REACT_APP_API_DOAMIN}/users/me`,
+    `${process.env.REACT_APP_API_DOMAIN}/users/me`,
     authToken
   );
   useEffect(() => {

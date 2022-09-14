@@ -12,10 +12,10 @@ export function Leads() {
   const [show, setShow] = useState(false);
   const [modalData, setModalData] = useState(null);
   const { data, loading } = useFetch(
-    `${process.env.REACT_APP_API_DOAMIN}/leads`,
+    `${process.env.REACT_APP_API_DOMAIN}/leads`,
     authToken
   );
-  const baseUrl = `${process.env.REACT_APP_API_DOAMIN}/leads`;
+  const baseUrl = `${process.env.REACT_APP_API_DOMAIN}/leads`;
   const handleShow = (e) => {
     setShow(true);
   };

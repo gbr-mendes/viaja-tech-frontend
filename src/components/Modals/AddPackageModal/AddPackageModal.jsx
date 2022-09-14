@@ -34,7 +34,7 @@ export function AddPackageModal(props) {
       setValuePerDay(0);
     }
   }, [props, props.show]);
-  const baseUrl = `${process.env.REACT_APP_API_DOAMIN}/packages`;
+  const baseUrl = `${process.env.REACT_APP_API_DOMAIN}/packages`;
   const deletePackage = async (e) => {
     await fetchDelete(`${baseUrl}/${formData._id}`, accessToken);
     props.onHide();

@@ -24,7 +24,7 @@ export function Register() {
 
   const handleRegister = (e) => {
     e.preventDefault();
-    fetch(`${process.env.REACT_APP_API_DOAMIN}/users/register`, {
+    fetch(`${process.env.REACT_APP_API_DOMAIN}/users/register`, {
       method: "POST",
       body: JSON.stringify({
         name: inputName,

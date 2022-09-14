@@ -15,7 +15,7 @@ export function Employee() {
   const [loading, setLoading] = useState(true);
   const [allowDeleteAtt, setAllowDeleteAtt] = useState(false);
 
-  const baseUrl = `${process.env.REACT_APP_API_DOAMIN}/employee/`;
+  const baseUrl = `${process.env.REACT_APP_API_DOMAIN}/employee/`;
   const handleShow = (e) => {
     setModalTitle("Atualizar Funcionário");
     setShow(true);
