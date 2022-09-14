@@ -5,7 +5,8 @@ import { Footer } from "../../components/Website/Footer";
 import { IndexPage } from "./IndexPageContent";
 import { Register } from "./register";
 import { Login } from "./login";
-import { Package } from "./packages/Packages";
+import { Packages } from "./packages";
+import { Package } from "./package";
 
 export function Website() {
   return (
@@ -15,7 +16,8 @@ export function Website() {
         <Routes>
           <Route path="/" element={<IndexPage />} />
           <Route path="/home" element={<IndexPage />} />
-          <Route path="/packageS" element={<Package />} />
+          <Route path="/packages" element={<Packages />} />
+          <Route path="/packages/:packageId" element={<Package />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
         </Routes>

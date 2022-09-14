@@ -5,6 +5,8 @@ import Alert from "react-bootstrap/Alert";
 import { useState } from "react";
 import { fetchDelete } from "../../../utils/FetchDelete";
 import { fetchPost } from "../../../utils/FetchPost";
+import { fetchPatch } from "../../../utils/FetchPatch";
+import { useEffect } from "react";
 
 export function AddPackageModal(props) {
   const accessToken = localStorage.getItem("auth-token");
@@ -12,37 +14,75 @@ export function AddPackageModal(props) {
   const [alertClass, setAlertClass] = useState("danger");
   const [alertMessage, setAlertMessage] = useState("");
   const [title, setTitle] = useState("");
+  const [shortDescription, setShortDescription] = useState("");
   const [description, setDescription] = useState("");
   const [valuePerDay, setValuePerDay] = useState(0);
   const formData = props.data || {};
   const allowDelete = props.allowDelete;
 
+  useEffect(() => {
+    if (props.data) {
+      const { data } = props;
+      setTitle(data.title);
+      setShortDescription(data.shortDescription);
+      setDescription(data.description);
+      setValuePerDay(data.valuePerDay);
+    } else {
+      setTitle("");
+      setShortDescription("");
+      setDescription("");
+      setValuePerDay(0);
+    }
+  }, [props, props.show]);
   const baseUrl = `${process.env.REACT_APP_API_DOAMIN}/packages`;
   const deletePackage = async (e) => {
     await fetchDelete(`${baseUrl}/${formData._id}`, accessToken);
     props.onHide();
   };
 
-  const addPackage = async (e) => {
-    const resp = await fetchPost(
-      baseUrl,
-      {
-        title,
-        description,
-        valuePerDay,
-      },
-      accessToken
-    );
-    setAlert(true);
-    if (resp.error) {
-      setAlertMessage(resp.error);
-      setAlertClass("danger");
+  const addOrUpdatePackage = async (e) => {
+    let resp = null;
+    if (!props.packageId) {
+      resp = await fetchPost(
+        baseUrl,
+        {
+          title,
+          shortDescription,
+          description,
+          valuePerDay,
+        },
+        accessToken
+      );
+      setAlert(true);
+      if (resp.error) {
+        setAlertMessage(resp.error);
+        setAlertClass("danger");
+      } else {
+        setTitle("");
+        setShortDescription("");
+        setDescription("");
+        setValuePerDay("");
+      }
     } else {
+      resp = await fetchPatch(
+        `${baseUrl}/${props.packageId}`,
+        {
+          title,
+          shortDescription,
+          description,
+          valuePerDay,
+        },
+        accessToken
+      );
+      setAlert(true);
+      if (resp.error) {
+        setAlertMessage(resp.error);
+        setAlertClass("danger");
+      }
+    }
+    if (!resp.error) {
       setAlertClass("success");
-      setAlertMessage("Pacote adicionado com sucesso");
-      setTitle("");
-      setDescription("");
-      setValuePerDay("");
+      setAlertMessage("Operação realizada com sucesso");
     }
   };
 
@@ -55,7 +95,7 @@ export function AddPackageModal(props) {
     >
       <Modal.Header closeButton>
         <Modal.Title id="contained-modal-title-vcenter">
-          Adicionar Pacote
+          {props.title}
         </Modal.Title>
       </Modal.Header>
       <Modal.Body>
@@ -72,7 +112,19 @@ export function AddPackageModal(props) {
               placeholder="Título do pacote"
               autoFocus
               onChange={(e) => setTitle(e.target.value)}
-              value={formData.title || title}
+              value={title}
+            />
+          </Form.Group>
+          <Form.Group
+            className="mb-3"
+            controlId="addPackageForm.ControlTextarea1"
+          >
+            <Form.Label>Descrição Curta</Form.Label>
+            <Form.Control
+              as="textarea"
+              rows={3}
+              onChange={(e) => setShortDescription(e.target.value)}
+              value={shortDescription}
             />
           </Form.Group>
           <Form.Group
@@ -84,7 +136,7 @@ export function AddPackageModal(props) {
               as="textarea"
               rows={5}
               onChange={(e) => setDescription(e.target.value)}
-              value={formData.description || description}
+              value={description}
             />
           </Form.Group>
           <Form.Group className="mb-3" controlId="addPackageForm.ControlInput2">
@@ -92,7 +144,7 @@ export function AddPackageModal(props) {
             <Form.Control
               type="number"
               onChange={(e) => setValuePerDay(e.target.value)}
-              value={formData.valuePerDay || valuePerDay}
+              value={valuePerDay}
             />
           </Form.Group>
         </Form>
@@ -103,7 +155,7 @@ export function AddPackageModal(props) {
             Excluir
           </Button>
         )}
-        <Button onClick={addPackage}>Adicionar Pacote</Button>
+        <Button onClick={addOrUpdatePackage}>{props.title}</Button>
       </Modal.Footer>
     </Modal>
   );

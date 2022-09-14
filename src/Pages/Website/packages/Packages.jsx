@@ -1,7 +1,7 @@
 import packageImage from "./img/air-craft.jpg";
 import "./Packages.css";
 
-export function Package() {
+export function Packages() {
   return (
     <>
       <section id="packages-section" className="bg-white">

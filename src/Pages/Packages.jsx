@@ -61,6 +61,7 @@ export function Packages() {
         title={modalTitle}
         data={formData}
         allowDelete={allowDeleteAtt}
+        packageId={idFetchElement}
       />
       <div className="d-flex flex-column flex-md-row justify-content-center align-items-center">
         <h1>Pacotes</h1>
@@ -68,9 +69,9 @@ export function Packages() {
           className="btn btn-primary ms-md-5"
           onClick={() => {
             setAllowDeleteAtt(false);
-            handleShow();
-            setModalTitle("Adicionar Pacote");
             setFormData(null);
+            setModalTitle("Adicionar Pacote");
+            handleShow();
           }}
         >
           Adicionar Pacote
