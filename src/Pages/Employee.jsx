@@ -8,12 +8,13 @@ import { fetchGet } from "../utils/FetchGet/FetchGet";
 export function Employee() {
   const authToken = localStorage.getItem("auth-token");
   const [show, setShow] = useState(false);
-  const [data, setData] = useState(null);
-  const [loading, setLoading] = useState(true);
-  const [idFetchElement, setIdFetchElement] = useState(null);
-  const [formData, setFormData] = useState(null);
   const [modalTitle, setModalTitle] = useState("Adicionar Funcionário");
+  const [idFetchElement, setIdFetchElement] = useState(null);
+  const [data, setData] = useState(null);
+  const [formData, setFormData] = useState(null);
+  const [loading, setLoading] = useState(true);
   const [allowDeleteAtt, setAllowDeleteAtt] = useState(false);
+
   const baseUrl = `${process.env.REACT_APP_API_DOAMIN}/employee/`;
   const handleShow = (e) => {
     setModalTitle("Atualizar Funcionário");
@@ -53,6 +54,7 @@ export function Employee() {
         title={modalTitle}
         data={formData}
         allowDelete={allowDeleteAtt}
+        employeeId={idFetchElement}
       />
       <div className="d-flex flex-column flex-md-row justify-content-center align-items-center">
         <h1>Funcionários</h1>

@@ -2,9 +2,11 @@ import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import Form from "react-bootstrap/Form";
 import Alert from "react-bootstrap/Alert";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { fetchPost } from "../../../utils/FetchPost";
+import { fetchPatch } from "../../../utils/FetchPatch";
 import { fetchDelete } from "../../../utils/FetchDelete";
+import { v4 as uuidv4 } from "uuid";
 
 export function AddUpdateEmployeeModal(props) {
   const accessToken = localStorage.getItem("auth-token");
@@ -20,43 +22,73 @@ export function AddUpdateEmployeeModal(props) {
   const formData = props.data || {};
   const allowDelete = props.allowDelete;
   const baseUrl = `${process.env.REACT_APP_API_DOAMIN}/employee`;
+  const options = ["Sales Manager", "General Manager", "Content Manager"];
+
+  useEffect(() => {
+    setAlert(false);
+    if (props.data) {
+      const { data } = props;
+      setName(data.name);
+      setEmail(data.email);
+      setPhone(data.phone);
+      setCpf(data.cpf);
+      setRole(data.position);
+      setSalary(data.salary);
+    } else {
+      setName("");
+      setEmail("");
+      setPhone("");
+      setCpf("");
+      setRole("Sales Manager");
+      setSalary(0);
+    }
+  }, [props, props.show, props.data]);
+
   const deleteEmployee = async (e) => {
-    console.log(formData);
     await fetchDelete(`${baseUrl}/${formData._id}`, accessToken);
     props.onHide();
   };
 
-  const addEmployee = async (e) => {
-    const resp = await fetchPost(
-      baseUrl,
-      {
-        userInfo: {
-          name,
-          email,
-          phone,
-          cpf,
-          password: "password",
-          confirmPassword: "password",
-        },
-        employeeInfo: {
-          position: role,
-          salary,
-        },
+  const addOrUpdateEmployee = async (e) => {
+    let resp = null;
+    const fetchData = {
+      userInfo: {
+        name,
+        email,
+        phone,
+        cpf,
       },
-      accessToken
-    );
+      employeeInfo: {
+        position: role,
+        salary,
+      },
+    };
+
+    if (!props.employeeId) {
+      fetchData.password = "password";
+      fetchData.confirmPassword = "password";
+      resp = await fetchPost(baseUrl, fetchData, accessToken);
+      if (!resp.error) {
+        setName("");
+        setEmail("");
+        setPhone("");
+        setCpf("");
+        setSalary(0);
+      }
+    } else {
+      resp = await fetchPatch(
+        `${baseUrl}/${props.employeeId}`,
+        fetchData,
+        accessToken
+      );
+    }
     setAlert(true);
     if (resp.error) {
       setAlertClass("danger");
       setAlertMessage(resp.error);
     } else {
       setAlertClass("success");
-      setAlertMessage("Funcionário cadastrado com sucesso");
-      setName("");
-      setEmail("");
-      setPhone("");
-      setCpf("");
-      setSalary(0);
+      setAlertMessage("Operação realizada com sucesso");
     }
   };
 
@@ -86,7 +118,7 @@ export function AddUpdateEmployeeModal(props) {
               placeholder="Nome do funcionário"
               autoFocus
               onChange={(e) => setName(e.target.value)}
-              value={formData.name || name}
+              value={name}
             />
           </Form.Group>
 
@@ -96,7 +128,7 @@ export function AddUpdateEmployeeModal(props) {
               type="email"
               placeholder="Email do funcionário"
               onChange={(e) => setEmail(e.target.value)}
-              value={formData.email || email}
+              value={email}
             />
           </Form.Group>
           <div className="d-flex flex-column flex-md-row justify-content-between">
@@ -106,7 +138,7 @@ export function AddUpdateEmployeeModal(props) {
                 type="text"
                 placeholder="Telefone do funcionário"
                 onChange={(e) => setPhone(e.target.value)}
-                value={formData.phone || phone}
+                value={phone}
               />
             </Form.Group>
 
@@ -116,7 +148,7 @@ export function AddUpdateEmployeeModal(props) {
                 type="text"
                 placeholder="CPF do funcionário"
                 onChange={(e) => setCpf(e.target.value)}
-                value={formData.cpf || cpf}
+                value={cpf}
               />
             </Form.Group>
           </div>
@@ -124,13 +156,19 @@ export function AddUpdateEmployeeModal(props) {
             <Form.Group className="mb-3 col-12 col-md-5 me-md-2">
               <Form.Select
                 onChange={(e) => setRole(e.target.value)}
-                defaultValue={role}
+                defaultChecked={role}
               >
-                <option value="Sales Manager" defaultChecked>
-                  Gerente de vendas
-                </option>
-                <option value="General Manager">Administrador Geral</option>
-                <option value="Content Manager">Gerente de conteúdo</option>
+                <option value={role}>{role}</option>
+                {options.map((option) => {
+                  if (option !== role) {
+                    return (
+                      <option value={option} key={uuidv4()}>
+                        {option}
+                      </option>
+                    );
+                  }
+                  return null;
+                })}
               </Form.Select>
             </Form.Group>
             <Form.Group className="mb-3 col-12 col-md-5 ms-md-2 d-md-flex justify-content-md-between">
@@ -145,12 +183,12 @@ export function AddUpdateEmployeeModal(props) {
         </Form>
       </Modal.Body>
       <Modal.Footer className="d-flex justify-content-center">
-        {allowDelete && (
+        {allowDelete ? (
           <Button className="btn-danger" onClick={deleteEmployee}>
             Excluir
           </Button>
-        )}
-        <Button onClick={addEmployee}>{props.title}</Button>
+        ) : null}
+        <Button onClick={addOrUpdateEmployee}>{props.title}</Button>
       </Modal.Footer>
     </Modal>
   );
