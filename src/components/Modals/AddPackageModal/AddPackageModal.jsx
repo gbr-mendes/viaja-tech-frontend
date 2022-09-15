@@ -151,11 +151,11 @@ export function AddPackageModal(props) {
         </Form>
       </Modal.Body>
       <Modal.Footer className="d-flex justify-content-center">
-        {allowDelete && (
+        {allowDelete ? (
           <Button className="btn-danger" onClick={deletePackage}>
             Excluir
           </Button>
-        )}
+        ) : null}
         <Button onClick={addOrUpdatePackage}>{props.title}</Button>
       </Modal.Footer>
     </Modal>

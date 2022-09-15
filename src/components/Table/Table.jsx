@@ -19,7 +19,7 @@ export function Table({ fields, rowsData, setIdMethod }) {
             return (
               <tr
                 className="table-row"
-                key={row._id}
+                key={uuidv4()}
                 onClick={(e) => setIdMethod(row._id)}
               >
                 {Object.keys(row).map((key) => {
