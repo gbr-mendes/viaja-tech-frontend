@@ -3,6 +3,7 @@ import { Table } from "../components/Table";
 import { useState } from "react";
 import { AddPackageModal } from "../components/Modals/AddPackageModal";
 import { useEffect } from "react";
+import { fetchGet } from "../utils/FetchGet";
 
 export function Packages() {
   const authToken = localStorage.getItem("auth-token");
@@ -13,11 +14,13 @@ export function Packages() {
   const [formData, setFormData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [allowDeleteAtt, setAllowDeleteAtt] = useState(true);
+  const baseUrl = `${process.env.REACT_APP_API_DOMAIN}/packages/`;
+
   const handleShow = (e) => {
     setModalTitle("Atualizar Pacote");
     setShow(true);
   };
-  useEffect(() => {
+  /*useEffect(() => {
     if (idFetchElement) {
       fetch(`${process.env.REACT_APP_API_DOMAIN}/packages/${idFetchElement}`, {
         headers: { Authorization: `Bearer ${authToken}` },
@@ -28,9 +31,32 @@ export function Packages() {
           handleShow();
         });
     }
-  }, [idFetchElement, authToken]);
+  }, [idFetchElement, authToken]);*/
+  useEffect(() => {
+    async function fetchData() {
+      const data = await fetchGet(baseUrl, authToken);
+      setLoading(false);
+      if (!data || data.error) {
+        setData(null);
+      } else {
+        setData(data);
+      }
+    }
+    fetchData();
+  }, [authToken, show, baseUrl]);
 
   useEffect(() => {
+    async function fetchData() {
+      const data = await fetchGet(`${baseUrl}/${idFetchElement}`, authToken);
+      setFormData(data);
+      handleShow();
+    }
+    if (idFetchElement) {
+      fetchData();
+    }
+  }, [authToken, baseUrl, idFetchElement]);
+
+  /*useEffect(() => {
     fetch(`${process.env.REACT_APP_API_DOMAIN}/packages`, {
       method: "GET",
       headers: { Authorization: `Bearer ${authToken}` },
@@ -49,13 +75,15 @@ export function Packages() {
         setLoading(false);
         setData(null);
       });
-  }, [show, authToken]);
+  }, [show, authToken]);*/
+
   return (
     <>
       <AddPackageModal
         show={show}
         onHide={() => {
           setShow(false);
+          setIdFetchElement(null);
           setAllowDeleteAtt(true);
         }}
         title={modalTitle}
@@ -69,9 +97,10 @@ export function Packages() {
           className="btn btn-primary ms-md-5"
           onClick={() => {
             setAllowDeleteAtt(false);
-            setFormData(null);
-            setModalTitle("Adicionar Pacote");
             handleShow();
+            setModalTitle("Adicionar Pacote");
+            setIdFetchElement(null);
+            setFormData(null);
           }}
         >
           Adicionar Pacote

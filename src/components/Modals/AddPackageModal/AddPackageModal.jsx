@@ -21,6 +21,7 @@ export function AddPackageModal(props) {
   const allowDelete = props.allowDelete;
 
   useEffect(() => {
+    setAlert(false);
     if (props.data) {
       const { data } = props;
       setTitle(data.title);

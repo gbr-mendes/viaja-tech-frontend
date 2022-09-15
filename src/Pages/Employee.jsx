@@ -50,7 +50,10 @@ export function Employee() {
     <>
       <AddUpdateEmployeeModal
         show={show}
-        onHide={() => setShow(false)}
+        onHide={() => {
+          setIdFetchElement(null);
+          setShow(false);
+        }}
         title={modalTitle}
         data={formData}
         allowDelete={allowDeleteAtt}
@@ -64,6 +67,7 @@ export function Employee() {
             setAllowDeleteAtt(false);
             handleShow();
             setModalTitle("Adicionar Funcionário");
+            setIdFetchElement(null);
             setFormData(null);
           }}
         >
