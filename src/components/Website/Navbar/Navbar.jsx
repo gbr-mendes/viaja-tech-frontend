@@ -2,13 +2,33 @@ import "./Navbar.css";
 import logo from "./img/logo-crm-grande.png";
 import { Link } from "react-router-dom";
 import { HashLink } from "react-router-hash-link";
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../../providers/auth";
 import { useNavigate } from "react-router-dom";
+import { fetchGet } from "../../../utils/FetchGet";
 
 export function Navbar() {
   const { user, setUser } = useContext(AuthContext);
+  const [userId, setUserId] = useState(null);
+  useEffect(() => {
+    if (user) {
+      const { _id } = user.userInfo;
+      setUserId(_id);
+    }
+  }, [user]);
+
   const navigate = useNavigate();
+  useEffect(() => {
+    async function appendVisite() {
+      if (userId) {
+        const resp = await fetchGet(
+          `${process.env.REACT_APP_API_DOMAIN}/business/append-visite/${userId}`
+        );
+        console.log(resp);
+      }
+    }
+    appendVisite();
+  }, [userId]);
 
   function logOut() {
     localStorage.removeItem("userData");

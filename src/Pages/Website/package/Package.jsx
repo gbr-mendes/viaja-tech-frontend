@@ -4,11 +4,31 @@ import { useParams } from "react-router-dom";
 import { fetchGet } from "../../../utils/FetchGet";
 import { Spinner } from "react-bootstrap";
 import packageImage from "./img/air-craft.jpg";
+import { useContext } from "react";
+import { AuthContext } from "../../../providers/auth";
 
 export function Package(props) {
   const { packageId } = useParams();
   const [pack, setPack] = useState(null);
-  const { loading, setLoading } = useState(true);
+  const [loading, setLoading] = useState(true);
+
+  const { user } = useContext(AuthContext);
+  useEffect(() => {
+    if (user) {
+      const { userInfo } = user;
+      const { role } = userInfo;
+
+      async function appendPackageView() {
+        await fetchGet(
+          `${process.env.REACT_APP_API_DOMAIN}/business/append-view/${packageId}/${userInfo._id}`
+        );
+      }
+
+      if (role === "isLead" || role === "isClient") {
+        appendPackageView();
+      }
+    }
+  }, [packageId, user]);
 
   useEffect(() => {
     async function fetchData() {
