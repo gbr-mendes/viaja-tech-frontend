@@ -4,6 +4,7 @@ import ListGroup from "react-bootstrap/ListGroup";
 
 export function ReadLeadModal(props) {
   const formData = props.data || {};
+  console.log(formData);
   return (
     props.data && (
       <Modal
@@ -63,7 +64,11 @@ export function ReadLeadModal(props) {
                 <ListGroup>
                   {formData.destinationsViewed.length > 0
                     ? formData.destinationsViewed.map((destination) => {
-                        return <ListGroup.Item>{destination}</ListGroup.Item>;
+                        return (
+                          <ListGroup.Item>
+                            {destination.packageTitle}
+                          </ListGroup.Item>
+                        );
                       })
                     : "--------------"}
                 </ListGroup>

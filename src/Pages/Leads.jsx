@@ -34,7 +34,10 @@ export function Leads() {
     <>
       <ReadLeadModal
         show={show}
-        onHide={() => setShow(false)}
+        onHide={() => {
+          setIdFetchElement(null);
+          setShow(false);
+        }}
         data={modalData}
       />
       <div className="d-flex justify-content-center">
