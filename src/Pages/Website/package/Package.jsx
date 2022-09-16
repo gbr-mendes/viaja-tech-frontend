@@ -6,13 +6,17 @@ import { Spinner } from "react-bootstrap";
 import packageImage from "./img/air-craft.jpg";
 import { useContext } from "react";
 import { AuthContext } from "../../../providers/auth";
+import { CheckoutModal } from "../../../components/Modals/CheckoutModal/CheckoutModal";
+import { useNavigate } from "react-router-dom";
 
 export function Package(props) {
   const { packageId } = useParams();
   const [pack, setPack] = useState(null);
   const [loading, setLoading] = useState(true);
-
+  const [show, setShow] = useState(false);
+  const navigate = useNavigate();
   const { user } = useContext(AuthContext);
+
   useEffect(() => {
     if (user) {
       const { userInfo } = user;
@@ -42,6 +46,13 @@ export function Package(props) {
 
   return (
     <>
+      <CheckoutModal
+        show={show}
+        onHide={() => {
+          setShow(false);
+        }}
+        packageData={pack}
+      />
       {loading && (
         <Spinner animation="border" role="status">
           <span className="visually-hidden">Loading...</span>
@@ -63,7 +74,7 @@ export function Package(props) {
                 alt=""
               />
               <div className="package-price mt-3">
-                <h4>R$ {pack.valuePerDay}/day</h4>
+                <h4>R$ {pack.valuePerDay}/dia</h4>
               </div>
             </div>
             <div className="package-description col-7">
@@ -73,7 +84,18 @@ export function Package(props) {
             </div>
           </container>
           <div className="checkout-button d-flex justify-content-center">
-            <button className="btn btn-primary">COMPRAR AGORA</button>
+            <button
+              className="btn btn-primary"
+              onClick={(e) => {
+                if (user) {
+                  setShow(true);
+                } else {
+                  navigate("/login");
+                }
+              }}
+            >
+              COMPRAR AGORA
+            </button>
           </div>
         </section>
       )}

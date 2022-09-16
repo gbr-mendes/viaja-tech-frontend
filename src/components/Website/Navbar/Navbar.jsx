@@ -21,10 +21,9 @@ export function Navbar() {
   useEffect(() => {
     async function appendVisite() {
       if (userId) {
-        const resp = await fetchGet(
+        await fetchGet(
           `${process.env.REACT_APP_API_DOMAIN}/business/append-visite/${userId}`
         );
-        console.log(resp);
       }
     }
     appendVisite();

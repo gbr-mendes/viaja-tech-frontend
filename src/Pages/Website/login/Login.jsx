@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import Alert from "react-bootstrap/Alert";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../../../providers/auth";
+import { fetchGet } from "../../../utils/FetchGet";
 
 export function Login() {
   const [inputEmail, setInputEmail] = useState("");
@@ -21,9 +22,9 @@ export function Login() {
     }
   }, []);
 
-  const handleLogin = (e) => {
+  const handleLogin = async (e) => {
     e.preventDefault();
-    fetch(`${process.env.REACT_APP_API_DOMAIN}/users/login`, {
+    await fetch(`${process.env.REACT_APP_API_DOMAIN}/users/login`, {
       method: "POST",
       body: JSON.stringify({
         email: inputEmail,
@@ -38,11 +39,21 @@ export function Login() {
           setAlertMessage(error);
         } else {
           window.localStorage.setItem("auth-token", token);
-          setUser({ name: "Gabriel" });
           setIsLoggedIn(true);
         }
       });
+    const authToken = localStorage.getItem("auth-token");
+    if (authToken) {
+      const userInfo = await fetchGet(
+        `${process.env.REACT_APP_API_DOMAIN}/users/me`,
+        authToken
+      );
+      if (userInfo) {
+        setUser(userInfo);
+      }
+    }
   };
+
   if (!isLoggedIn) {
     return (
       <section

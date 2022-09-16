@@ -2,19 +2,28 @@ import "./IndexPage.css";
 import { Masthead } from "../../../components/Website/Masthead/Masthead";
 import { ServicesSection } from "../../../components/Website/ServicesSection/ServicesSection";
 import { ContactSection } from "../../../components/Website/ContactSection/ContactSection";
-import { useEffect } from "react";
-import { useContext } from "react";
+import { useEffect, useState, useContext } from "react";
 import { AuthContext } from "../../../providers/auth";
-import { useFetch } from "../../../hooks/useFetch";
+import { fetchGet } from "../../../utils/FetchGet";
 
 export function IndexPage() {
+  const [data, setData] = useState(null);
   const { setUser } = useContext(AuthContext);
-
   const authToken = window.localStorage.getItem("auth-token");
-  const { data } = useFetch(
-    `${process.env.REACT_APP_API_DOMAIN}/users/me`,
-    authToken
-  );
+  useEffect(() => {
+    async function fetchData() {
+      if (authToken) {
+        const data = await fetchGet(
+          `${process.env.REACT_APP_API_DOMAIN}/users/me`,
+          authToken
+        );
+        if (data) {
+          setData(data);
+        }
+      }
+    }
+    fetchData();
+  }, [authToken]);
   useEffect(() => {
     if (data != null) {
       setUser(data);
