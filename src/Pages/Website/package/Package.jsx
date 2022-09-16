@@ -66,8 +66,8 @@ export function Package(props) {
             </div>
             <p className="display-lead text-center">{pack.shortDescription}</p>
           </div>
-          <container className="packages-container d-flex align-items-center justify-content-center p-5">
-            <div className="package-image d-flex d-md-block align-items-center justify-content-center">
+          <container className="packages-container d-flex flex-column flex-md-row align-items-center justify-content-center p-5">
+            <div className="package-image d-flex flex-column flex-md-row d-md-block align-items-center justify-content-center">
               <img
                 src={packageImage}
                 className="img-thumbnail rounded w-75 mb-4 mb-lg-0"
@@ -77,7 +77,7 @@ export function Package(props) {
                 <h4>R$ {pack.valuePerDay}/dia</h4>
               </div>
             </div>
-            <div className="package-description col-7">
+            <div className="package-description col-7 mt-3 mt-md-0">
               <div className="pacakge-extract text-muted">
                 {pack.description}
               </div>
