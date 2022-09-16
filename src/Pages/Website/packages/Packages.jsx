@@ -7,7 +7,12 @@ import "./Packages.css";
 
 export function Packages() {
   const [packages, setPackages] = useState([]);
-
+  function truncateDescription(text) {
+    if (text.length <= 150) {
+      return text;
+    }
+    return text.substring(0, 150) + "...";
+  }
   useEffect(() => {
     async function fetchData() {
       const url = `${process.env.REACT_APP_API_DOMAIN}/packages`;
@@ -31,9 +36,9 @@ export function Packages() {
             return (
               <Link
                 to={`/packages/${item._id}`}
-                className="d-flex justify-content-center align-items-center"
+                className="d-flex justify-content-center align-items-center w-75"
               >
-                <div className="package w-75 p-5 border d-flex flex-column flex-lg-row m-2">
+                <div className="package p-5 border d-flex flex-column flex-lg-row m-2">
                   <div className="package-image d-flex d-md-block align-items-center justify-content-center">
                     <img
                       src={packageImage}
@@ -46,7 +51,7 @@ export function Packages() {
                       <h4>{item.title}</h4>
                     </div>
                     <div className="pacakge-extract text-muted">
-                      {item.shortDescription}
+                      {truncateDescription(item.shortDescription)}
                     </div>
                     <div className="package-price mt-3">
                       <h4>R$ {item.valuePerDay}/dia</h4>
