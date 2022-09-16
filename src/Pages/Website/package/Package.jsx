@@ -16,9 +16,11 @@ export function Package(props) {
   const [show, setShow] = useState(false);
   const navigate = useNavigate();
   const { user } = useContext(AuthContext);
+  const [userData, setUserData] = useState(null);
 
   useEffect(() => {
     if (user) {
+      setUserData(user);
       const { userInfo } = user;
       const { role } = userInfo;
 
@@ -84,18 +86,23 @@ export function Package(props) {
             </div>
           </container>
           <div className="checkout-button d-flex justify-content-center">
-            <button
-              className="btn btn-primary"
-              onClick={(e) => {
-                if (user) {
-                  setShow(true);
-                } else {
-                  navigate("/login");
-                }
-              }}
-            >
-              COMPRAR AGORA
-            </button>
+            {(!userData ||
+              (userData &&
+                (userData.userInfo.role === "isLead" ||
+                  userData.userInfo.role === "isClient"))) && (
+              <button
+                className="btn btn-primary"
+                onClick={(e) => {
+                  if (user) {
+                    setShow(true);
+                  } else {
+                    navigate("/login");
+                  }
+                }}
+              >
+                COMPRAR AGORA
+              </button>
+            )}
           </div>
         </section>
       )}
