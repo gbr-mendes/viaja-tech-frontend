@@ -1,0 +1,34 @@
+.contact-list-container{
+    box-shadow: 5px 5px 15px 5px #000000;
+    height: 60vh;
+    overflow-y: scroll;
+}
+.contact-list-container input{
+    display: block;
+}
+.contact-list-container input:checked{
+    border-color: #F06B05;
+    background-color:#F06B05 ;
+}
+.contact-list-container form{
+    border-bottom: 1px solid rgb(102, 102, 102);
+    margin-bottom: 5px;
+}
+.contact{
+    transition: 0.5s;
+}
+.contact:hover{
+    background-color: #DCE5DD;
+    padding: 2px;
+    cursor: pointer;
+}
+.text-editor{
+    box-shadow: 5px 5px 15px 5px #000000;
+    height: 60vh;
+    margin-top: 0;
+}
+@media(max-width: 767px){
+    .contact-list-container, .text-editor{
+        height: 25vh;
+    }
+}

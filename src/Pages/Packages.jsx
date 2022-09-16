@@ -56,27 +56,6 @@ export function Packages() {
     }
   }, [authToken, baseUrl, idFetchElement]);
 
-  /*useEffect(() => {
-    fetch(`${process.env.REACT_APP_API_DOMAIN}/packages`, {
-      method: "GET",
-      headers: { Authorization: `Bearer ${authToken}` },
-    })
-      .then((res) => {
-        if (!res.ok) {
-          throw Error("Could not fetch the data for that resourse");
-        }
-        return res.json();
-      })
-      .then((data) => {
-        setLoading(false);
-        setData(data);
-      })
-      .catch((err) => {
-        setLoading(false);
-        setData(null);
-      });
-  }, [show, authToken]);*/
-
   return (
     <>
       <AddPackageModal
@@ -106,18 +85,20 @@ export function Packages() {
           Adicionar Pacote
         </button>
       </div>
-      {loading && (
-        <Spinner animation="border" role="status">
-          <span className="visually-hidden">Loading...</span>
-        </Spinner>
-      )}
-      {data && (
-        <Table
-          fields={["title", "valuePerDay"]}
-          rowsData={data.results}
-          setIdMethod={setIdFetchElement}
-        />
-      )}
+      <div className="d-flex justify-content-center align-items-center">
+        {loading && (
+          <Spinner animation="border" role="status">
+            <span className="visually-hidden">Loading...</span>
+          </Spinner>
+        )}
+        {data && (
+          <Table
+            fields={["title", "valuePerDay"]}
+            rowsData={data.results}
+            setIdMethod={setIdFetchElement}
+          />
+        )}
+      </div>
     </>
   );
 }
