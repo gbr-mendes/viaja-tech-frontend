@@ -3,8 +3,11 @@ import { Spinner } from "react-bootstrap";
 import { useState, useEffect } from "react";
 import { fetchGet } from "../utils/FetchGet";
 import { ReadClientModal } from "../components/Modals/ReadClientModal";
+import { useVerifyPermissions } from "../hooks/useVerifyPermissions";
 
 export function Clients() {
+  const allowedRoles = ["isAdmin", "isSalesManager"];
+  const { isAllowed } = useVerifyPermissions(allowedRoles);
   const [loading, setLoading] = useState(true);
   const [show, setShow] = useState(false);
   const [data, setData] = useState(null);
@@ -41,7 +44,7 @@ export function Clients() {
     }
     fetchData();
   }, [idFetchElement, authToken, baseUrl]);
-  return (
+  return isAllowed ? (
     <>
       <ReadClientModal
         show={show}
@@ -68,5 +71,9 @@ export function Clients() {
         />
       )}
     </>
+  ) : (
+    <div className="d-flex flex-column flex-md-row align-items-center">
+      <h1>Forbidden</h1>
+    </div>
   );
 }

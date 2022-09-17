@@ -4,9 +4,12 @@ import { useState } from "react";
 import { AddUpdateEmployeeModal } from "../components/Modals/AddUpdateEmployeeModal";
 import { useEffect } from "react";
 import { fetchGet } from "../utils/FetchGet/FetchGet";
+import { useVerifyPermissions } from "../hooks/useVerifyPermissions";
 
 export function Employee() {
   const authToken = localStorage.getItem("auth-token");
+  const allowedRoles = ["isAdmin"];
+  const { isAllowed } = useVerifyPermissions(allowedRoles);
   const [show, setShow] = useState(false);
   const [modalTitle, setModalTitle] = useState("Adicionar Funcionário");
   const [idFetchElement, setIdFetchElement] = useState(null);
@@ -46,7 +49,7 @@ export function Employee() {
     fetchData();
   }, [authToken, show, baseUrl]);
 
-  return (
+  return isAllowed ? (
     <>
       <AddUpdateEmployeeModal
         show={show}
@@ -87,5 +90,9 @@ export function Employee() {
         />
       )}
     </>
+  ) : (
+    <div className="d-flex flex-column flex-md-row align-items-center">
+      <h1>Forbidden</h1>
+    </div>
   );
 }

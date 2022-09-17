@@ -1,12 +1,14 @@
 import { Spinner } from "react-bootstrap";
 import { Table } from "../components/Table";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { AddPackageModal } from "../components/Modals/AddPackageModal";
-import { useEffect } from "react";
 import { fetchGet } from "../utils/FetchGet";
+import { useVerifyPermissions } from "../hooks/useVerifyPermissions";
 
 export function Packages() {
+  const allowedRoles = ["isAdmin", "isSiteAdmin"];
   const authToken = localStorage.getItem("auth-token");
+  const { isAllowed } = useVerifyPermissions(allowedRoles);
   const [show, setShow] = useState(false);
   const [modalTitle, setModalTitle] = useState("Adicionar Pacote");
   const [idFetchElement, setIdFetchElement] = useState(null);
@@ -20,18 +22,7 @@ export function Packages() {
     setModalTitle("Atualizar Pacote");
     setShow(true);
   };
-  /*useEffect(() => {
-    if (idFetchElement) {
-      fetch(`${process.env.REACT_APP_API_DOMAIN}/packages/${idFetchElement}`, {
-        headers: { Authorization: `Bearer ${authToken}` },
-      })
-        .then((resp) => resp.json())
-        .then((data) => {
-          setFormData(data);
-          handleShow();
-        });
-    }
-  }, [idFetchElement, authToken]);*/
+
   useEffect(() => {
     async function fetchData() {
       const data = await fetchGet(baseUrl, authToken);
@@ -56,7 +47,7 @@ export function Packages() {
     }
   }, [authToken, baseUrl, idFetchElement]);
 
-  return (
+  return isAllowed ? (
     <>
       <AddPackageModal
         show={show}
@@ -100,5 +91,9 @@ export function Packages() {
         )}
       </div>
     </>
+  ) : (
+    <div className="d-flex flex-column flex-md-row align-items-center">
+      <h1>Forbidden</h1>
+    </div>
   );
 }

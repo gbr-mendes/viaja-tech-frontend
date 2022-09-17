@@ -1,9 +1,12 @@
 import { useState } from "react";
 import { Form, FormGroup } from "react-bootstrap";
 import RichTextEditor from "../../components/RichTextEditor/RichTextEditor";
+import { useVerifyPermissions } from "../../hooks/useVerifyPermissions";
 import "./Marketing.css";
 
 export function Marketing() {
+  const allowedRoles = ["isAdmin", "isSalesManager"];
+  const { isAllowed } = useVerifyPermissions(allowedRoles);
   const [getLeads, setGetLeads] = useState(true);
   const [getClients, setGetClients] = useState(true);
   const [getAll, setGetAll] = useState(getLeads && getClients);
@@ -11,7 +14,7 @@ export function Marketing() {
   for (let i = 0; i < 10; i++) {
     leads.push(`Lead ${i + 1}`);
   }
-  return (
+  return isAllowed ? (
     <>
       <div className="d-flex justify-content-center align-itens-center">
         <h1>Marketing Page</h1>
@@ -77,5 +80,9 @@ export function Marketing() {
         </div>
       </div>
     </>
+  ) : (
+    <div className="d-flex flex-column flex-md-row align-items-center">
+      <h1>Forbidden</h1>
+    </div>
   );
 }

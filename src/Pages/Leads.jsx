@@ -5,9 +5,12 @@ import { useState } from "react";
 import { useEffect } from "react";
 import { ReadLeadModal } from "../components/Modals/ReadLeadModal/ReadLeadModal";
 import { fetchGet } from "../utils/FetchGet";
+import { useVerifyPermissions } from "../hooks/useVerifyPermissions";
 
 export function Leads() {
   const authToken = localStorage.getItem("auth-token");
+  const allowedRoles = ["isAdmin", "isSalesManager"];
+  const { isAllowed } = useVerifyPermissions(allowedRoles);
   const [idFetchElement, setIdFetchElement] = useState(null);
   const [show, setShow] = useState(false);
   const [modalData, setModalData] = useState(null);
@@ -30,7 +33,7 @@ export function Leads() {
     fetchData();
   }, [idFetchElement, authToken, baseUrl]);
 
-  return (
+  return isAllowed ? (
     <>
       <ReadLeadModal
         show={show}
@@ -56,5 +59,9 @@ export function Leads() {
         />
       )}
     </>
+  ) : (
+    <div className="d-flex flex-column flex-md-row align-items-center">
+      <h1>Forbidden</h1>
+    </div>
   );
 }

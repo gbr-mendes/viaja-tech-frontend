@@ -10,15 +10,24 @@ import "./Main.css";
 import { Marketing } from "../../Pages/Marketing";
 import { Packages } from "../../Pages/Packages";
 import { Employee } from "../../Pages/Employee";
+import { useContext } from "react";
+import { AuthContext } from "../../providers/auth";
 
 export function Main() {
+  const { user } = useContext(AuthContext);
+  const { role: userRole } = user.userInfo;
+  const defaultComponentsByRole = {
+    isAdmin: <Clients />,
+    isSalesManager: <Clients />,
+    isSiteAdmin: <Packages />,
+  };
   return (
     <main className="main-content p-0">
       <MainHeader />
       <section className="content-section container-fluid">
         <div className="dyanamic-content d-flex flex-column">
           <Routes>
-            <Route path="" element={<Clients />} />
+            <Route path="" element={defaultComponentsByRole[userRole]} />
             <Route path="/packages" element={<Packages />} />
             <Route path="/clients" element={<Clients />} />
             <Route path="/leads" element={<Leads />} />
