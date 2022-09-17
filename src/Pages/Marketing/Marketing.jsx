@@ -21,8 +21,7 @@ export function Marketing() {
   const [subject, setSubject] = useState("");
 
   const triggerEmail = async (e) => {
-    //${process.env.REACT_APP_API_MARKETING_DOMAIN}
-    const url = `http://localhost:5000/api/v1/marketing/promotions/create-campaing`;
+    const url = `${process.env.REACT_APP_API_MARKETING_DOMAIN}/api/v1/marketing/promotions/create-campaing`;
     const authToken = localStorage.getItem("auth-token");
     const data = {
       target_emails: mailList,
