@@ -3,6 +3,7 @@ import { Form, FormGroup } from "react-bootstrap";
 import { useVerifyPermissions } from "../../hooks/useVerifyPermissions";
 import { fetchGet } from "../../utils/FetchGet";
 import { fetchPost } from "../../utils/FetchPost";
+import Alert from "react-bootstrap/Alert";
 import RichTextEditor from "../../components/RichTextEditor/RichTextEditor";
 import "./Marketing.css";
 
@@ -19,8 +20,12 @@ export function Marketing() {
   const [sendEmailDisabled, setSendEmailDisabled] = useState(false);
   const [emailContent, setEmailContent] = useState(null);
   const [subject, setSubject] = useState("");
+  const [alert, setAlert] = useState(false);
+  const [alertClass, setAlertClass] = useState("danger");
+  const [alertMessage, setAlertMessage] = useState("");
 
   const triggerEmail = async (e) => {
+    setSendEmailDisabled(true);
     const url = `${process.env.REACT_APP_API_MARKETING_DOMAIN}/marketing/promotions/create-campaing`;
     const authToken = localStorage.getItem("auth-token");
     const data = {
@@ -29,7 +34,17 @@ export function Marketing() {
       body: emailContent,
     };
     const resp = await fetchPost(url, data, authToken);
-    console.log(resp);
+    setAlert(true);
+    if (resp.error) {
+      setAlertClass("danger");
+      setAlertMessage(resp.error);
+    } else if (!resp.success) {
+      setAlertClass("danger");
+      setAlertMessage("Ocorreu um erro ao disparar os emails");
+    }
+    setAlertClass("success");
+    setAlertMessage("Emails enviados com sucesso!");
+    setSendEmailDisabled(false);
   };
 
   useEffect(() => {
@@ -139,6 +154,11 @@ export function Marketing() {
           </div>
         </div>
         <div className="text-editor col-12 col-md-8 bg-white">
+          {alert && (
+            <Alert key={alertClass} variant={alertClass}>
+              {alertMessage}
+            </Alert>
+          )}
           <div>
             <label
               htmlFor="#campaing-title"
