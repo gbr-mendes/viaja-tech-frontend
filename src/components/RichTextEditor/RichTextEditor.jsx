@@ -1,5 +1,6 @@
 import React from "react";
 import { Editor, EditorState, getDefaultKeyBinding, RichUtils } from "draft-js";
+import { stateToHTML } from "draft-js-export-html";
 import "./RichTextEditor.css";
 import "../../../node_modules/draft-js/dist/Draft.css";
 
@@ -9,7 +10,10 @@ class RichTextEditor extends React.Component {
     this.state = { editorState: EditorState.createEmpty() };
 
     this.focus = () => this.refs.editor.focus();
-    this.onChange = (editorState) => this.setState({ editorState });
+    this.onChange = (editorState) => {
+      this.setState({ editorState });
+      props.setContent(stateToHTML(editorState.getCurrentContent()));
+    };
 
     this.handleKeyCommand = this._handleKeyCommand.bind(this);
     this.mapKeyToEditorCommand = this._mapKeyToEditorCommand.bind(this);
