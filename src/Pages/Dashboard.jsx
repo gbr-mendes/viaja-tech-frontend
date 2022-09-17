@@ -2,15 +2,29 @@ import { Footer } from "../components/Footer";
 import { Main } from "../components/Main/Main";
 import { SideMenu } from "../components/SideMenu/SideMenu";
 import { PrivateRoute } from "./PrivateRoute";
-import { useFetch } from "../hooks/useFetch";
+import { AuthContext } from "../providers/auth";
+import { useEffect, useContext, useState } from "react";
+import { fetchGet } from "../utils/FetchGet";
 
 export function Dashboard() {
+  const [data, setData] = useState(null);
+  const { setUser } = useContext(AuthContext);
+
   const authToken = localStorage.getItem("auth-token");
-  const { data } = useFetch(
-    `${process.env.REACT_APP_API_DOMAIN}/users/me`,
-    authToken
-  );
-  localStorage.setItem("userData", JSON.stringify(data));
+
+  useEffect(() => {
+    async function fetchData() {
+      const baseUrl = `${process.env.REACT_APP_API_DOMAIN}/users/me`;
+      if (authToken) {
+        const data = await fetchGet(baseUrl, authToken);
+        localStorage.setItem("userData", JSON.stringify(data));
+        setData(data);
+        setUser(data);
+      }
+    }
+    fetchData();
+  }, [data, authToken, setUser]);
+
   return (
     <PrivateRoute
       redirectTo={"/login/dashboard"}

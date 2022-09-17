@@ -33,45 +33,53 @@ export function SideMenu() {
         <nav className="menu-items">
           <ul className="items-list">
             <Button
-              link="/dashboard/packages"
-              text="Packages"
-              icon="fa-solid fa-route"
-              isActive={true}
-            />
-            <Button
               link="/dashboard/clients"
               text="Clientes"
               icon="fa-solid fa-money-bills"
+              allowedRoles={["isAdmin", "isSalesManager"]}
             />
             <Button
               link="/dashboard/leads"
               text="Leads"
               icon="fa-regular fa-eye"
+              allowedRoles={["isAdmin", "isSalesManager"]}
             />
             <Button
               link="/dashboard/employee"
               text="Employee"
               icon="fa-solid fa-person-chalkboard"
+              allowedRoles={["isAdmin"]}
+            />
+            <Button
+              link="/dashboard/packages"
+              text="Packages"
+              icon="fa-solid fa-route"
+              isActive={true}
+              allowedRoles={["isAdmin", "isSiteAdmin"]}
             />
             <Button
               link="/dashboard/marketing"
               text="Marketing"
               icon="fa-solid fa-headphones-simple"
+              allowedRoles={["isAdmin", "isSalesManager"]}
             />
             <Button
               link="/dashboard/reports"
               text="Relatórios"
               icon="fa-solid fa-print"
+              allowedRoles={["isAdmin"]}
             />
             <Button
               link="/dashboard/calls"
               text="Chamados"
               icon="fa-solid fa-phone"
+              allowedRoles={["isAdmin"]}
             />
             <Button
               link="/dashboard/tools"
               text="Ferramentas"
               icon="fa-solid fa-screwdriver-wrench"
+              allowedRoles={["isAdmin"]}
             />
           </ul>
         </nav>
