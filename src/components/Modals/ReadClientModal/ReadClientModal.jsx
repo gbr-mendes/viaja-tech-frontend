@@ -21,27 +21,37 @@ export function ReadClientModal(props) {
           <Form>
             <Form.Group className="mb-3 d-flex flex-column flex-lg-row">
               <div className="d-flex flex-column col-12 col-lg-6 me-1">
-                <Form.Label>Nome</Form.Label>
+                <Form.Label>
+                  <b>Nome</b>
+                </Form.Label>
                 <Form.Control type="text" value={formData.name} disabled />
               </div>
               <div className="d-flex flex-column col-12 col-lg-6 ms-1">
-                <Form.Label>Email</Form.Label>
+                <Form.Label>
+                  <b>Email</b>
+                </Form.Label>
                 <Form.Control type="email" value={formData.email} disabled />
               </div>
             </Form.Group>
             <Form.Group className="mb-3 d-flex flex-column flex-lg-row">
               <div className="d-flex flex-column col-12 col-lg-6 me-1">
-                <Form.Label>CPF</Form.Label>
+                <Form.Label>
+                  <b>CPF</b>
+                </Form.Label>
                 <Form.Control type="text" value={formData.cpf} disabled />
               </div>
               <div className="d-flex flex-column col-12 col-lg-6 ms-1">
-                <Form.Label>Telefone</Form.Label>
+                <Form.Label>
+                  <b>Telefone</b>
+                </Form.Label>
                 <Form.Control type="email" value={formData.phone} disabled />
               </div>
             </Form.Group>
             <Form.Group className="mb-3 d-flex flex-column flex-lg-row">
               <div className="d-flex flex-column col-12 col-lg-6 me-1">
-                <Form.Label>Qtd. de visitas ao website</Form.Label>
+                <Form.Label>
+                  <b>Qtd. de visitas ao website</b>
+                </Form.Label>
                 <Form.Control
                   type="number"
                   value={formData.websiteVisits}
@@ -49,7 +59,9 @@ export function ReadClientModal(props) {
                 />
               </div>
               <div className="d-flex flex-column col-12 col-lg-6 me-1">
-                <Form.Label>Gastos Totais (R$)</Form.Label>
+                <Form.Label>
+                  <b>Gastos Totais (R$)</b>
+                </Form.Label>
                 <Form.Control
                   type="number"
                   value={formData.spending}
@@ -57,10 +69,39 @@ export function ReadClientModal(props) {
                 />
               </div>
             </Form.Group>
-
+            <Form.Group>
+              <div className="d-flex flex-column col-12 col-lg-6 ms-1">
+                <Form.Label>
+                  <b>Destino mais visualizado</b>
+                </Form.Label>
+                <Form.Control
+                  type="email"
+                  value={formData.mostViewedDestination || "--------------"}
+                  disabled
+                />
+              </div>
+            </Form.Group>
             <Form.Group className="mb-3 d-flex flex-column flex-lg-row">
-              <div className="d-flex flex-column col-12 me-1">
-                <Form.Label>Destinos Visitados</Form.Label>
+              <div className="d-flex flex-column col-12 col-lg-6 me-1">
+                <Form.Label>
+                  <b>Destinos pesquisados</b>
+                </Form.Label>
+                <ListGroup>
+                  {formData.destinationsViewed.length > 0
+                    ? formData.destinationsViewed.map((destination) => {
+                        return (
+                          <ListGroup.Item>
+                            {destination.packageTitle}
+                          </ListGroup.Item>
+                        );
+                      })
+                    : "--------------"}
+                </ListGroup>
+              </div>
+              <div className="d-flex flex-column col-12 col-lg-6 ms-1">
+                <Form.Label>
+                  <b>Destinos Visitados</b>
+                </Form.Label>
                 <ListGroup>
                   {formData.destinationsVisited.length > 0
                     ? formData.destinationsVisited.map((destination) => {

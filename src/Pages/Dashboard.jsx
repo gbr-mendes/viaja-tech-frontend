@@ -23,7 +23,7 @@ export function Dashboard() {
       }
     }
     fetchData();
-  }, [data, authToken, setUser]);
+  }, [authToken, setUser]);
 
   return (
     <PrivateRoute
