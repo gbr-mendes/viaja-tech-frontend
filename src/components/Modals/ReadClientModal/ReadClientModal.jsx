@@ -2,9 +2,8 @@ import Modal from "react-bootstrap/Modal";
 import Form from "react-bootstrap/Form";
 import ListGroup from "react-bootstrap/ListGroup";
 
-export function ReadLeadModal(props) {
+export function ReadClientModal(props) {
   const formData = props.data || {};
-
   return (
     props.data && (
       <Modal
@@ -49,26 +48,23 @@ export function ReadLeadModal(props) {
                   disabled
                 />
               </div>
-              <div className="d-flex flex-column col-12 col-lg-6 ms-1">
-                <Form.Label>Destino mais visualizado</Form.Label>
+              <div className="d-flex flex-column col-12 col-lg-6 me-1">
+                <Form.Label>Gastos Totais (R$)</Form.Label>
                 <Form.Control
-                  type="email"
-                  value={formData.mostViewedDestination || "--------------"}
+                  type="number"
+                  value={formData.spending}
                   disabled
                 />
               </div>
             </Form.Group>
+
             <Form.Group className="mb-3 d-flex flex-column flex-lg-row">
               <div className="d-flex flex-column col-12 me-1">
-                <Form.Label>Destinos pesquisados</Form.Label>
+                <Form.Label>Destinos Visitados</Form.Label>
                 <ListGroup>
-                  {formData.destinationsViewed.length > 0
-                    ? formData.destinationsViewed.map((destination) => {
-                        return (
-                          <ListGroup.Item>
-                            {destination.packageTitle}
-                          </ListGroup.Item>
-                        );
+                  {formData.destinationsVisited.length > 0
+                    ? formData.destinationsVisited.map((destination) => {
+                        return <ListGroup.Item>{destination}</ListGroup.Item>;
                       })
                     : "--------------"}
                 </ListGroup>
@@ -76,6 +72,7 @@ export function ReadLeadModal(props) {
             </Form.Group>
           </Form>
         </Modal.Body>
+        <Modal.Footer className="d-flex justify-content-center"></Modal.Footer>
       </Modal>
     )
   );
