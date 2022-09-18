@@ -30,7 +30,11 @@ export function Table({ fields, rowsData, setIdMethod, thByFieldObject }) {
                         <p>------</p>
                       </td>
                     ) : (
-                      <td key={uuidv4()}>{row[key]}</td>
+                      <td key={uuidv4()}>
+                        {typeof row[key] !== "number"
+                          ? row[key]
+                          : row[key].toFixed(2)}
+                      </td>
                     ))
                   );
                 })}
