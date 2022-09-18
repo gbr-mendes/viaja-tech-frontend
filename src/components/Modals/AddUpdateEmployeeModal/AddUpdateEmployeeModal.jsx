@@ -57,6 +57,8 @@ export function AddUpdateEmployeeModal(props) {
         email,
         phone,
         cpf,
+        password: "password",
+        confirmPassword: "password",
       },
       employeeInfo: {
         position: role,
