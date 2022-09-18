@@ -56,7 +56,7 @@ export function Clients() {
         employeeId={idFetchElement}
       />
       <div className="d-flex justify-content-center">
-        <h1>Clients page</h1>
+        <h1>Clientes</h1>
       </div>
       {loading && (
         <Spinner animation="border" role="status">

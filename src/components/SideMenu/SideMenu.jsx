@@ -46,13 +46,13 @@ export function SideMenu() {
             />
             <Button
               link="/dashboard/employee"
-              text="Employee"
+              text="Funcionários"
               icon="fa-solid fa-person-chalkboard"
               allowedRoles={["isAdmin"]}
             />
             <Button
               link="/dashboard/packages"
-              text="Packages"
+              text="Pacotes"
               icon="fa-solid fa-route"
               isActive={true}
               allowedRoles={["isAdmin", "isSiteAdmin"]}
@@ -79,7 +79,7 @@ export function SideMenu() {
               link="/dashboard/tools"
               text="Ferramentas"
               icon="fa-solid fa-screwdriver-wrench"
-              allowedRoles={["isAdmin"]}
+              allowedRoles={["isAdmin", "isSalesManager", "isSiteAdmin"]}
             />
           </ul>
         </nav>

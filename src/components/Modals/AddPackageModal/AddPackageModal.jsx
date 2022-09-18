@@ -107,7 +107,9 @@ export function AddPackageModal(props) {
         )}
         <Form>
           <Form.Group className="mb-3" controlId="addPackageForm.ControlInput1">
-            <Form.Label>Título</Form.Label>
+            <Form.Label>
+              <b>Título</b>
+            </Form.Label>
             <Form.Control
               type="text"
               placeholder="Título do pacote"
@@ -120,7 +122,9 @@ export function AddPackageModal(props) {
             className="mb-3"
             controlId="addPackageForm.ControlTextarea1"
           >
-            <Form.Label>Descrição Curta</Form.Label>
+            <Form.Label>
+              <b>Descrição Curta</b>
+            </Form.Label>
             <Form.Control
               as="textarea"
               rows={3}
@@ -132,7 +136,9 @@ export function AddPackageModal(props) {
             className="mb-3"
             controlId="addPackageForm.ControlTextarea1"
           >
-            <Form.Label>Descrição</Form.Label>
+            <Form.Label>
+              <b>Descrição</b>
+            </Form.Label>
             <Form.Control
               as="textarea"
               rows={5}
@@ -141,7 +147,9 @@ export function AddPackageModal(props) {
             />
           </Form.Group>
           <Form.Group className="mb-3" controlId="addPackageForm.ControlInput2">
-            <Form.Label>Valor da Diária</Form.Label>
+            <Form.Label>
+              <b>Valor da Diária</b>
+            </Form.Label>
             <Form.Control
               type="number"
               onChange={(e) => setValuePerDay(e.target.value)}

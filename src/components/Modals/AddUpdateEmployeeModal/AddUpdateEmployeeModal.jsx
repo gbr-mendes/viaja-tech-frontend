@@ -114,7 +114,9 @@ export function AddUpdateEmployeeModal(props) {
         )}
         <Form>
           <Form.Group className="mb-3">
-            <Form.Label>Nome</Form.Label>
+            <Form.Label>
+              <b>Nome</b>
+            </Form.Label>
             <Form.Control
               type="text"
               placeholder="Nome do funcionário"
@@ -125,7 +127,9 @@ export function AddUpdateEmployeeModal(props) {
           </Form.Group>
 
           <Form.Group className="mb-3">
-            <Form.Label>Email</Form.Label>
+            <Form.Label>
+              <b>Email</b>
+            </Form.Label>
             <Form.Control
               type="email"
               placeholder="Email do funcionário"
@@ -135,7 +139,9 @@ export function AddUpdateEmployeeModal(props) {
           </Form.Group>
           <div className="d-flex flex-column flex-md-row justify-content-between">
             <Form.Group className="mb-3 col-12 col-md-5 me-md-2">
-              <Form.Label>Telefone</Form.Label>
+              <Form.Label>
+                <b>Telefone</b>
+              </Form.Label>
               <Form.Control
                 type="text"
                 placeholder="Telefone do funcionário"
@@ -145,7 +151,9 @@ export function AddUpdateEmployeeModal(props) {
             </Form.Group>
 
             <Form.Group className="mb-3 col-12 col-md-5 ms-md-2">
-              <Form.Label>CPF</Form.Label>
+              <Form.Label>
+                <b>CPF</b>
+              </Form.Label>
               <Form.Control
                 type="text"
                 placeholder="CPF do funcionário"
@@ -174,7 +182,9 @@ export function AddUpdateEmployeeModal(props) {
               </Form.Select>
             </Form.Group>
             <Form.Group className="mb-3 col-12 col-md-5 ms-md-2 d-md-flex justify-content-md-between">
-              <Form.Label className=" pe-2 pt-2">Salário</Form.Label>
+              <Form.Label className=" pe-2 pt-2">
+                <b>Salário</b>
+              </Form.Label>
               <Form.Control
                 type="number"
                 onChange={(e) => setSalary(e.target.value)}

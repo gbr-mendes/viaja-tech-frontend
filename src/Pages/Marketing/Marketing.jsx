@@ -76,7 +76,7 @@ export function Marketing() {
   return isAllowed ? (
     <>
       <div className="d-flex justify-content-center align-itens-center">
-        <h1>Marketing Page</h1>
+        <h1>Marketing</h1>
       </div>
       <div className="d-flex flex-column flex-md-row justify-content-center align-items-center mt-5">
         <div className="contact-list-container col-12 col-md-3 bg-white mb-3 mb-md-0 me-md-2">
@@ -159,34 +159,34 @@ export function Marketing() {
               {alertMessage}
             </Alert>
           )}
-          <div>
-            <label
-              htmlFor="#campaing-title"
-              className="col-12 col-md-3 d-flex justify-content-center"
-            >
-              <b>Título da campanha: </b>
-            </label>
-            <input
-              className="col-12 col-md-9"
-              type="text"
-              id="campaing-title"
-              placeholder="Digite aqui o título da campanha"
-              onChange={(e) => {
-                setSubject(e.target.value);
-              }}
-              value={subject}
-            />
-          </div>
-          <RichTextEditor setContent={setEmailContent} />
-          <div className="d-flex justify-content-center align-items-center p-3">
+          <div className="d-flex">
+            <div className="col-10">
+              <label
+                htmlFor="#campaing-title"
+                className="col-12 col-md-3 d-flex justify-content-center"
+              >
+                <b>Título da campanha: </b>
+              </label>
+              <input
+                className="col-12 col-md-9"
+                type="text"
+                id="campaing-title"
+                placeholder="Digite aqui o título da campanha"
+                onChange={(e) => {
+                  setSubject(e.target.value);
+                }}
+                value={subject}
+              />
+            </div>
             <button
-              className="btn btn-primary"
+              className="btn btn-primary col-2"
               onClick={triggerEmail}
               disabled={sendEmailDisabled}
             >
-              Disparar Email
+              Enviar
             </button>
           </div>
+          <RichTextEditor setContent={setEmailContent} />
         </div>
       </div>
     </>

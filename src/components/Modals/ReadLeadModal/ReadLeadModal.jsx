@@ -22,27 +22,37 @@ export function ReadLeadModal(props) {
           <Form>
             <Form.Group className="mb-3 d-flex flex-column flex-lg-row">
               <div className="d-flex flex-column col-12 col-lg-6 me-1">
-                <Form.Label>Nome</Form.Label>
+                <Form.Label>
+                  <b>Nome</b>
+                </Form.Label>
                 <Form.Control type="text" value={formData.name} disabled />
               </div>
               <div className="d-flex flex-column col-12 col-lg-6 ms-1">
-                <Form.Label>Email</Form.Label>
+                <Form.Label>
+                  <b>Email</b>
+                </Form.Label>
                 <Form.Control type="email" value={formData.email} disabled />
               </div>
             </Form.Group>
             <Form.Group className="mb-3 d-flex flex-column flex-lg-row">
               <div className="d-flex flex-column col-12 col-lg-6 me-1">
-                <Form.Label>CPF</Form.Label>
+                <Form.Label>
+                  <b>CPF</b>
+                </Form.Label>
                 <Form.Control type="text" value={formData.cpf} disabled />
               </div>
               <div className="d-flex flex-column col-12 col-lg-6 ms-1">
-                <Form.Label>Telefone</Form.Label>
+                <Form.Label>
+                  <b>Telefone</b>
+                </Form.Label>
                 <Form.Control type="email" value={formData.phone} disabled />
               </div>
             </Form.Group>
             <Form.Group className="mb-3 d-flex flex-column flex-lg-row">
               <div className="d-flex flex-column col-12 col-lg-6 me-1">
-                <Form.Label>Qtd. de visitas ao website</Form.Label>
+                <Form.Label>
+                  <b>Qtd. de visitas ao website</b>
+                </Form.Label>
                 <Form.Control
                   type="number"
                   value={formData.websiteVisits}
@@ -50,7 +60,9 @@ export function ReadLeadModal(props) {
                 />
               </div>
               <div className="d-flex flex-column col-12 col-lg-6 ms-1">
-                <Form.Label>Destino mais visualizado</Form.Label>
+                <Form.Label>
+                  <b>Destino mais visualizado</b>
+                </Form.Label>
                 <Form.Control
                   type="email"
                   value={formData.mostViewedDestination || "--------------"}
@@ -60,7 +72,9 @@ export function ReadLeadModal(props) {
             </Form.Group>
             <Form.Group className="mb-3 d-flex flex-column flex-lg-row">
               <div className="d-flex flex-column col-12 me-1">
-                <Form.Label>Destinos pesquisados</Form.Label>
+                <Form.Label>
+                  <b>Destinos pesquisados</b>
+                </Form.Label>
                 <ListGroup>
                   {formData.destinationsViewed.length > 0
                     ? formData.destinationsViewed.map((destination) => {
