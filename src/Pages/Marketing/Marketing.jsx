@@ -58,13 +58,13 @@ export function Marketing() {
       const contactList = [];
       if (getLeads) {
         let leads = await fetchGet(`${baseUrl}/leads`, authToken);
-        leads = leads.results.filter((lead) => lead.notfications === true);
+        leads = leads.results.filter((lead) => lead.notifications === true);
         leads.map((lead) => contactList.push(lead));
       }
       if (getClients) {
         let clients = await fetchGet(`${baseUrl}/clients`, authToken);
         clients = clients.results.filter(
-          (client) => client.notfications === true
+          (client) => client.notifications === true
         );
         clients.map((client) => contactList.push(client));
       }

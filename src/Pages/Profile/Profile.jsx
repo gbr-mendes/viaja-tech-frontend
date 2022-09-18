@@ -28,7 +28,7 @@ export function Profile() {
       method: "PUT",
       body: formData,
       headers: {
-        "auth-token": authToken,
+        Authorization: `Bearer ${authToken}`,
       },
     })
       .then((resp) => {
@@ -39,6 +39,7 @@ export function Profile() {
       })
       .then((data) => {
         setAvatar(data.image);
+        setAlertClass("success");
         setAlertShow(true);
         setAlertMessage(data.success);
       })
