@@ -6,6 +6,12 @@ import { ReadClientModal } from "../components/Modals/ReadClientModal";
 import { useVerifyPermissions } from "../hooks/useVerifyPermissions";
 
 export function Clients() {
+  const thByFieldObject = {
+    name: "Nome",
+    email: "E-mail",
+    spending: "Gastos (R$)",
+    lastPurchase: "Última Compra",
+  };
   const allowedRoles = ["isAdmin", "isSalesManager"];
   const { isAllowed } = useVerifyPermissions(allowedRoles);
   const [loading, setLoading] = useState(true);
@@ -68,6 +74,7 @@ export function Clients() {
           fields={["name", "email", "spending", "lastPurchase"]}
           rowsData={data}
           setIdMethod={setIdFetchElement}
+          thByFieldObject={thByFieldObject}
         />
       )}
     </>

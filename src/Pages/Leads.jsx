@@ -8,6 +8,12 @@ import { fetchGet } from "../utils/FetchGet";
 import { useVerifyPermissions } from "../hooks/useVerifyPermissions";
 
 export function Leads() {
+  const thByFieldObject = {
+    name: "Nome",
+    email: "E-mail",
+    phone: "Telefone",
+    mostViewedDestination: "Destino mais Pesquisado",
+  };
   const authToken = localStorage.getItem("auth-token");
   const allowedRoles = ["isAdmin", "isSalesManager"];
   const { isAllowed } = useVerifyPermissions(allowedRoles);
@@ -56,6 +62,7 @@ export function Leads() {
           fields={["name", "email", "phone", "mostViewedDestination"]}
           rowsData={data.results}
           setIdMethod={setIdFetchElement}
+          thByFieldObject={thByFieldObject}
         />
       )}
     </>

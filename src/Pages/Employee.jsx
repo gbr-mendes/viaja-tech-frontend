@@ -7,6 +7,13 @@ import { fetchGet } from "../utils/FetchGet/FetchGet";
 import { useVerifyPermissions } from "../hooks/useVerifyPermissions";
 
 export function Employee() {
+  const thByFieldObject = {
+    name: "Nome",
+    cpf: "CPF",
+    phone: "Telefone",
+    salary: "Salário(R$)",
+    position: "Cargo",
+  };
   const authToken = localStorage.getItem("auth-token");
   const allowedRoles = ["isAdmin"];
   const { isAllowed } = useVerifyPermissions(allowedRoles);
@@ -87,6 +94,7 @@ export function Employee() {
           fields={["name", "cpf", "phone", "salary", "position"]}
           rowsData={data.results}
           setIdMethod={setIdFetchElement}
+          thByFieldObject={thByFieldObject}
         />
       )}
     </>

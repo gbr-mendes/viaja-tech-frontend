@@ -6,6 +6,10 @@ import { fetchGet } from "../utils/FetchGet";
 import { useVerifyPermissions } from "../hooks/useVerifyPermissions";
 
 export function Packages() {
+  const thByFieldObject = {
+    title: "Título do pacote",
+    valuePerDay: "Valor da Diária (R$)",
+  };
   const allowedRoles = ["isAdmin", "isSiteAdmin"];
   const authToken = localStorage.getItem("auth-token");
   const { isAllowed } = useVerifyPermissions(allowedRoles);
@@ -87,6 +91,7 @@ export function Packages() {
             fields={["title", "valuePerDay"]}
             rowsData={data.results}
             setIdMethod={setIdFetchElement}
+            thByFieldObject={thByFieldObject}
           />
         )}
       </div>

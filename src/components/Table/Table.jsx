@@ -1,7 +1,7 @@
 import { v4 as uuidv4 } from "uuid";
 import "./Table.css";
 
-export function Table({ fields, rowsData, setIdMethod }) {
+export function Table({ fields, rowsData, setIdMethod, thByFieldObject }) {
   return (
     <div className="d-flex justify-content-lg-center p-5">
       <table className="general-table">
@@ -9,7 +9,7 @@ export function Table({ fields, rowsData, setIdMethod }) {
           <tr>
             {fields.map((field, i) => (
               <th key={uuidv4()} className="table-header">
-                {field}
+                {thByFieldObject[field]}
               </th>
             ))}
           </tr>
